@@ -3,17 +3,9 @@ package minizoo;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.Image;
 import java.awt.RenderingHints;
 import java.awt.geom.AffineTransform;
-import java.awt.geom.Point2D;
-import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
-import java.awt.image.BufferedImageOp;
-import java.awt.image.ColorModel;
-import java.awt.image.ConvolveOp;
-import java.awt.image.ImageObserver;
-import java.awt.image.Kernel;
 
 import javax.swing.JComponent;
 
