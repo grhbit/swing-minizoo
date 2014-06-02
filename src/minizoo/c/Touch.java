@@ -22,11 +22,13 @@ public class Touch implements MouseListener, MouseMotionListener {
 
 		Entity _currHovered = null;
 		for (Entity entity : Entity.list) {
-			Collider collider = (Collider)entity;
+			if (entity instanceof Collider) {
+				Collider collider = (Collider)entity;
 			
-			if (collider.intersect(current)) {
-				_currHovered = entity;
-				break;
+				if (collider.intersect(current)) {
+					_currHovered = entity;
+					break;
+				}
 			}
 		}
 		

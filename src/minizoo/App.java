@@ -9,13 +9,15 @@ import javax.swing.Timer;
 
 import minizoo.Canvas;
 import minizoo.c.Animal;
+import minizoo.c.Background;
 import minizoo.c.Entity;
 import minizoo.c.Touch;
+import minizoo.c.core.Vector2d;
 
 public class App implements ActionListener {
 	public final static String Title = "Our Mini Zoo!";
-	public final static int ScreenWidth = 800;
-	public final static int ScreenHeight = 600;
+	public final static int ScreenWidth = 1280;
+	public final static int ScreenHeight = 720;
 	
 	public static App Instance() {
 		if (instance == null) {
@@ -47,8 +49,12 @@ public class App implements ActionListener {
 		mainCanvas.addMouseListener(mouse);
 		mainCanvas.addMouseMotionListener(mouse);
 		
+		Background background = new Background();
+		Entity.add(background);
+		
 		Animal animal = new Animal();
-		Entity.list.add(animal);
+		animal.setContentSize(new Vector2d(100, 100));
+		Entity.add(animal);
 	}
 
 	public void run() {
