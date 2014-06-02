@@ -1,6 +1,8 @@
 package minizoo.c;
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Shape;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
@@ -12,58 +14,51 @@ import minizoo.i.Drawable;
 
 public abstract class Entity implements Comparable<Entity>, Collider, Drawable {
 
+	public Entity(String name) {
+		this.name = name;
+	}
+	public String toString() {
+		return "Entity " + name + " " + getPosition();
+	}
+
 	@Override
 	public boolean intersect(Point2D point) {
-		Rectangle2D rect2d = new Rectangle2D.Double(position.x, position.y, getContentSize().x, getContentSize().y);
-		return rect2d.contains(point);
+		AffineTransform affineTransform = getTransform();
+		Rectangle2D boxCollider = new Rectangle2D.Double(0, 0, getContentSize().x, getContentSize().y);
+		Shape transShaped = affineTransform.createTransformedShape(boxCollider);
+
+		return transShaped.contains(point);
 	}
 
 	@Override
 	public void draw (Graphics g) {
-		beforeDraw(g);
-		visit(g);
-		afterDraw(g);
-	}
-	
-	protected void beforeDraw(Graphics g) {
 		Graphics2D g2 = (Graphics2D)g;
+		beforeDraw(g2);
+		visit(g2);
+		afterDraw(g2);
+	}
+
+	protected void beforeDraw(Graphics2D g2) {
 		// Push Matrix
 		lastAffineTransform = g2.getTransform();
-		
-		AffineTransform transform = new AffineTransform();
-		
-		// Anchor Apply
-		transform.translate(-contentSize.x * anchor.x, -contentSize.y * anchor.y);
-		
-		// Scale
-		transform.scale(scale.x, scale.y);
-		
-		// Rotation
-		// transform.rotate(rotation);
+		g2.transform(getTransform());
+	}
 
-		// Translation
-		transform.translate(position.x, position.y);
-		
-		g2.transform(transform);
+	protected void visit(Graphics2D g2) {
 	}
-	
-	protected void visit(Graphics g) {
-		
-	}
-	
-	protected void afterDraw(Graphics g) {
-		drawChildren(g);
-		
+
+	protected void afterDraw(Graphics2D g2) {
+		drawChildren(g2);
+
 		// Pop Matrix
-		Graphics2D g2 = (Graphics2D)g;
-		g2.setTransform(lastAffineTransform);	
+		g2.setTransform(lastAffineTransform);
 	}
-	
-	protected void drawChildren(Graphics g) {
+
+	protected void drawChildren(Graphics2D g2) {
 		for (Entity child : getChildren()) {
 			if (child!=null && child instanceof Drawable) {
 				Drawable drawable = (Drawable)child;
-				drawable.draw(g);
+				drawable.draw(g2);
 			}
 		}
 	}
@@ -81,21 +76,22 @@ public abstract class Entity implements Comparable<Entity>, Collider, Drawable {
 		entity.zOrder = zOrder;
 		children.add(entity);
 	}
-	
+
 	public void removeChild(Entity entity) {
 		children.remove(entity);
 	}
-	
+
 	public PriorityQueue<Entity> getChildren() {
 		return children;
 	}
-	
+
 	public void Update(float elapsed) {
 		updatedTime += elapsed;
 	}
-	
+
 	public void setContentSize(Vector2d contentSize) {
 		this.contentSize = contentSize;
+		isDirty = true;
 	}
 	public Vector2d getContentSize() {
 		return contentSize;
@@ -103,32 +99,43 @@ public abstract class Entity implements Comparable<Entity>, Collider, Drawable {
 
 	public void setPosition(Vector2d position) {
 		this.position = position;
+		isDirty = true;
 	}
 	public Vector2d getPosition() {
 		return position;
 	}
-	
+
 	public void setAnchor(Vector2d anchor) {
 		this.anchor = anchor;
+		isDirty = true;
 	}
 	public Vector2d getAnchor() {
 		return anchor;
 	}
-	
+
 	public void setScale(Vector2d anchor) {
 		this.scale = anchor;
+		isDirty = true;
 	}
 	public Vector2d getScale() {
 		return scale;
 	}
-	
+
 	public void setRotation(double rotation) {
 		this.rotation = rotation;
+		isDirty = true;
 	}
 	public double getRotation() {
 		return rotation;
 	}
 	
+	public void setColor(Color color) {
+		this.color = color;
+	}
+	public Color getColor() {
+		return color;
+	}
+
 	public void setZOrder(int zOrder) {
 		this.zOrder = zOrder;
 	}
@@ -136,15 +143,40 @@ public abstract class Entity implements Comparable<Entity>, Collider, Drawable {
 		return zOrder;
 	}
 
+	public AffineTransform getTransform() {
+		if (isDirty) {
+			transform.setToIdentity();
+
+			// Translation
+			transform.translate(position.x, position.y);
+
+			// Rotation
+			transform.rotate(rotation);
+
+			// Scale
+			transform.scale(scale.x, scale.y);
+
+			// Anchor Apply
+			transform.translate(-contentSize.x * anchor.x, -contentSize.y * anchor.y);
+		}
+
+		return transform;
+	}
+
 	// Entity property
-	Vector2d contentSize = Vector2d.zero;
-	Vector2d position = Vector2d.zero;
+	String name;
+	Vector2d contentSize = new Vector2d(0, 0);
+	Vector2d position = new Vector2d(0, 0);
 	Vector2d anchor = new Vector2d(0.5, 0.5);
-	Vector2d scale = Vector2d.one;
+	Vector2d scale = new Vector2d(1, 1);
 	double rotation = 0.0;
+	Color color = Color.white;
 	int zOrder = -1;
 
-	float updatedTime;	
+	AffineTransform transform = new AffineTransform();
+	boolean isDirty = true;
+
+	float updatedTime;
 	AffineTransform lastAffineTransform;
 
 	// Entity hierarchy
