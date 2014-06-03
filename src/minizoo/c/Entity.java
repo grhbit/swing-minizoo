@@ -125,8 +125,8 @@ public abstract class Entity implements Comparable<Entity>, Collider, Drawable, 
 		return anchor;
 	}
 
-	public void setScale(Vector2d anchor) {
-		this.scale = anchor;
+	public void setScale(Vector2d scale) {
+		this.scale = scale;
 		isDirty = true;
 	}
 	public Vector2d getScale() {
