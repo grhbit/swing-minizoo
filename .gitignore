@@ -34,3 +34,10 @@ Icon
 .Trashes
 
 /bin/
+
+###IntelliJ###
+
+*.iml
+*.ipr
+*.iws
+.idea/

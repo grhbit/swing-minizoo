@@ -23,12 +23,13 @@ public class Canvas extends JComponent {
 		backBuffer = new BufferedImage(App.ScreenWidth, App.ScreenHeight, BufferedImage.TYPE_INT_RGB);
 	}
 
-	public void Update(float elapsed) {
+	public void update(float elapsed) {
 		for (Entity entity : Entity.list) {
-			entity.Update(elapsed);
+			entity.update(elapsed);
 		}
 	}
 
+    double f=0.0;
 	@Override
 	public void paint(Graphics g) {
 		Graphics2D g2 = (Graphics2D)g;
@@ -37,8 +38,9 @@ public class Canvas extends JComponent {
 		Graphics2D backBufferGraphics2D = (Graphics2D)backBufferGraphic;
 
 		// Clear color-buffer
-		backBufferGraphic.setColor(Color.WHITE);
+		backBufferGraphic.setColor(Color.gray);
 		backBufferGraphic.fillRect(0, 0, App.ScreenWidth, App.ScreenHeight);
+		backBufferGraphic.setColor(Color.white);
 
 		// Anti-aliasing
 		backBufferGraphics2D.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
@@ -46,12 +48,13 @@ public class Canvas extends JComponent {
 
 		for (Entity entity : Entity.list) {
 			if (entity instanceof Drawable) {
-				Drawable drawable = (Drawable)entity;
+				Drawable drawable = entity;
 				drawable.draw(backBufferGraphic);
 			}
 		}
 		backBufferGraphic.dispose();
 
+        // Stretch to design resolution.
 		g2.scale((double)getWidth()/App.ScreenWidth, (double)getHeight()/App.ScreenHeight);
 
 		// Present

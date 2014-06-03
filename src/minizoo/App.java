@@ -11,7 +11,10 @@ import minizoo.Canvas;
 import minizoo.c.Animal;
 import minizoo.c.Background;
 import minizoo.c.Entity;
+import minizoo.c.FPSTimer;
 import minizoo.c.Touch;
+import minizoo.c.action.*;
+import minizoo.c.action.easing.*;
 import minizoo.c.core.Vector2d;
 
 public class App implements ActionListener {
@@ -48,7 +51,7 @@ public class App implements ActionListener {
 		mainCanvas.setSize(App.ScreenWidth, App.ScreenHeight);
 		mainFrame.add(mainCanvas, BorderLayout.CENTER);
 
-		mainLoopTimer = new Timer(16, this);
+		mainLoopTimer = new Timer(0, this);
 
 		mouse = new Touch();
 		mainCanvas.addMouseListener(mouse);
@@ -60,11 +63,21 @@ public class App implements ActionListener {
 		Animal animal = new Animal("Animal");
 		animal.setContentSize(new Vector2d(100, 100));
 		Entity.add(animal, 2);
+
+        Finite moving2 = new MoveBy(animal, 3, 800, 600);
+        Finite moving = new MoveBy(animal, 3, -400, -400);
+        action = new Sequence(new EaseInOutSine(moving2), new Delay(1.0f), new EaseInOutSine(moving));
+        action.setTarget(animal);
+
+		FPSTimer fpsTimer = new FPSTimer();
+		Entity.add(fpsTimer, Integer.MAX_VALUE);
 	}
+    Action action = null;
 
 	public void run() {
 		init();
 
+        mainLoopTimer.setRepeats(true);
 		mainLoopTimer.start();
 		mainFrame.setVisible(true);
 	}
@@ -74,7 +87,7 @@ public class App implements ActionListener {
 		long currUpdateTime = System.currentTimeMillis();
 
 		if ((currUpdateTime-lastUpdateTime) < 1000) {
-			this.MainLoop((currUpdateTime-lastUpdateTime)/1000f);
+			this.MainLoop((currUpdateTime-lastUpdateTime)*0.001f);
 		}
 		lastUpdateTime = currUpdateTime;
 	}
@@ -82,7 +95,8 @@ public class App implements ActionListener {
 	void MainLoop(float elapsed) {
 		this.Update(elapsed);
 
-		mainCanvas.Update(elapsed);
+        action.update(elapsed);
+		mainCanvas.update(elapsed);
 		mainCanvas.repaint();
 	}
 

@@ -11,8 +11,9 @@ import java.util.PriorityQueue;
 import minizoo.c.core.Vector2d;
 import minizoo.i.Collider;
 import minizoo.i.Drawable;
+import minizoo.i.Task;
 
-public abstract class Entity implements Comparable<Entity>, Collider, Drawable {
+public abstract class Entity implements Comparable<Entity>, Collider, Drawable, Task {
 
 	public Entity(String name) {
 		this.name = name;
@@ -26,8 +27,18 @@ public abstract class Entity implements Comparable<Entity>, Collider, Drawable {
 		AffineTransform affineTransform = getTransform();
 		Rectangle2D boxCollider = new Rectangle2D.Double(0, 0, getContentSize().x, getContentSize().y);
 		Shape transShaped = affineTransform.createTransformedShape(boxCollider);
+		
+		if (transShaped.contains(point)) {
+			return true;
+		} else {
+			for (Entity child : getChildren()) {
+				if (child.intersect(point)) {
+					return true;
+				}
+			}
+		}
 
-		return transShaped.contains(point);
+		return false;
 	}
 
 	@Override
@@ -57,7 +68,7 @@ public abstract class Entity implements Comparable<Entity>, Collider, Drawable {
 	protected void drawChildren(Graphics2D g2) {
 		for (Entity child : getChildren()) {
 			if (child!=null && child instanceof Drawable) {
-				Drawable drawable = (Drawable)child;
+				Drawable drawable = child;
 				drawable.draw(g2);
 			}
 		}
@@ -85,7 +96,8 @@ public abstract class Entity implements Comparable<Entity>, Collider, Drawable {
 		return children;
 	}
 
-	public void Update(float elapsed) {
+    @Override
+	public void update(float elapsed) {
 		updatedTime += elapsed;
 	}
 

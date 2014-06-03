@@ -11,6 +11,27 @@ public class Vector2d {
 		this.x = x;
 		this.y = y;
 	}
+    public Vector2d(Vector2d vec2d) {
+        this.x = vec2d.x;
+        this.y = vec2d.y;
+    }
+
+    public void add(Vector2d rhs) {
+        this.x += rhs.x;
+        this.y += rhs.y;
+    }
+    public void sub(Vector2d rhs) {
+        this.x -= rhs.x;
+        this.y -= rhs.y;
+    }
+    public void mul(Vector2d rhs) {
+        this.x *= rhs.x;
+        this.y *= rhs.y;
+    }
+    public void mul(float factor) {
+        this.x *= factor;
+        this.y *= factor;
+    }
 
 	public String toString() {
 		return "x=> " + x + " y=> " + y;
@@ -19,6 +40,8 @@ public class Vector2d {
 	public Point2D toPoint2D() {
 		return new Point2D.Double(x, y);
 	}
+
+    public Vector2d clone() { return new Vector2d(x, y); }
 
 	public double x = 0.0;
 	public double y = 0.0;

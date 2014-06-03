@@ -13,7 +13,7 @@ import minizoo.App;
 public class Background extends Entity {
 	
 	@Override
-	public void Update(float elapsed) {
+	public void update(float elapsed) {
 	}
 
 	@Override

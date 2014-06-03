@@ -34,11 +34,11 @@ public class Touch implements MouseListener, MouseMotionListener {
 		}
 		
 		if (currHovered != _currHovered) {
-			if ((currHovered!=null) && ((TouchListener)currHovered!=null)) {
+			if ((currHovered!=null) && currHovered instanceof TouchListener) {
 				((TouchListener)currHovered).Hover(false);
 			}
 			
-			if ((_currHovered!=null) && ((TouchListener)_currHovered!=null)) {
+			if ((_currHovered!=null) && _currHovered instanceof TouchListener) {
 				((TouchListener)_currHovered).Hover(true);
 			}
 			
@@ -123,7 +123,7 @@ public class Touch implements MouseListener, MouseMotionListener {
 		currentDrag = currHovered;
 		
 		setCurrentTouchPosition(arg0);		
-		if (currentDrag != null && ((TouchListener)currentDrag!=null)) {
+		if (currentDrag != null && currentDrag instanceof TouchListener) {
 			TouchListener touchListener = (TouchListener)currentDrag;
 			touchListener.Press(true, current);
 		}
@@ -135,7 +135,7 @@ public class Touch implements MouseListener, MouseMotionListener {
 		currentDrag = null;
 
 		setCurrentTouchPosition(arg0);
-		if (currentDrag != null && ((TouchListener)currentDrag!=null)) {
+		if (currentDrag != null && currentDrag instanceof TouchListener) {
 			TouchListener touchListener = (TouchListener)currentDrag;
 			touchListener.Press(false, current);
 		}
@@ -144,7 +144,7 @@ public class Touch implements MouseListener, MouseMotionListener {
 	@Override
 	public void mouseDragged(MouseEvent arg0) {
 		setCurrentTouchPosition(arg0);
-		if (currentDrag != null && ((TouchListener)currentDrag!=null)) {
+		if (currentDrag != null && currentDrag instanceof TouchListener) {
 			TouchListener touchListener = (TouchListener)currentDrag;
 			touchListener.Drag(current);
 		}		

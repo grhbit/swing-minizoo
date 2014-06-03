@@ -3,25 +3,26 @@ package minizoo.c;
 import java.awt.Graphics2D;
 import java.awt.geom.Point2D;
 
+import minizoo.e.State;
 import minizoo.i.Collider;
 import minizoo.i.Drawable;
 import minizoo.i.TouchListener;
 
-public class Animal extends Entity implements TouchListener, Collider, Drawable {
+public class Animal extends Entity implements TouchListener {
 
 	public Animal(String name) {
 		super(name);
 	}
 
 	@Override
-	public void Update(float elapsed) {
-		super.Update(elapsed);
+	public void update(float elapsed) {
+		super.update(elapsed);
 	}
 
 	@Override
 	public void Hover(boolean isHover) {
 		// TODO Auto-generated method stub
-		System.out.println("Hover " + isHover);
+		System.out.println("Hover " + isHover + " " + this.name);
 
 		if (isHover) {
 			scale.x = 1.2;
@@ -43,7 +44,6 @@ public class Animal extends Entity implements TouchListener, Collider, Drawable 
 
 	@Override
 	public void Press(boolean isPress, Point2D point) {
-		// TODO Auto-generated method stub
 		System.out.println("Press " + isPress + " " + point);
 		sx = point.getX() - position.x;
 		sy = point.getY() - position.y;
@@ -51,7 +51,7 @@ public class Animal extends Entity implements TouchListener, Collider, Drawable 
 
 	@Override
 	public void Click() {
-		System.out.println("Click");
+		setRotation(getRotation() + 20);
 	}
 
 	@Override
@@ -66,4 +66,6 @@ public class Animal extends Entity implements TouchListener, Collider, Drawable 
 		g2.fillRect(0, 0, (int)getContentSize().x, (int)getContentSize().y);
 	}
 
+    State currState = State.Default;
+    State prevState = null;
 }
