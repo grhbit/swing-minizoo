@@ -15,6 +15,12 @@ public class MoveBy extends Finite {
     }
 
     @Override
+    public void clear() {
+        super.clear();
+        prevT = 0f;
+    }
+
+    @Override
     public void sample(float t) {
         if (getTarget() != null) {
             Vector2d res = new Vector2d(relativePos);
@@ -28,6 +34,5 @@ public class MoveBy extends Finite {
     }
 
     float prevT = 0f;
-    Vector2d beginPos = new Vector2d(0, 0);
     Vector2d relativePos;
 }

@@ -1,6 +1,7 @@
 package minizoo.c.action;
 
 public abstract class Finite extends Action {
+
     @Override
     public void update(float elapsed) {
         super.update(elapsed);

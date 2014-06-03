@@ -61,12 +61,13 @@ public class App implements ActionListener {
 		Entity.add(background);
 
 		Animal animal = new Animal("Animal");
+        animal.setPosition(new Vector2d(400, 400));
 		animal.setContentSize(new Vector2d(100, 100));
 		Entity.add(animal, 2);
 
-        Finite moving2 = new MoveBy(animal, 3, 800, 600);
-        Finite moving = new MoveBy(animal, 3, -400, -400);
-        action = new Sequence(new EaseInOutSine(moving2), new Delay(1.0f), new EaseInOutSine(moving));
+        Finite moving2 = new MoveBy(animal, 2.0f, 200, 200);
+        Finite moving = new MoveBy(animal, 2.0f, -200, -200);
+        action = new Forever(new Sequence(new EaseInOutSine(moving2), new EaseInOutSine(moving)));
         action.setTarget(animal);
 
 		FPSTimer fpsTimer = new FPSTimer();

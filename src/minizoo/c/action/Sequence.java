@@ -13,6 +13,14 @@ public class Sequence extends Finite {
     }
 
     @Override
+    public void clear() {
+        super.clear();
+        for (Finite action : actions) {
+            action.clear();
+        }
+    }
+
+    @Override
     public float getDuration() {
         float accDuration = 0f;
         for (Finite action : actions) {
@@ -28,14 +36,11 @@ public class Sequence extends Finite {
 
         float accDuration = 0f;
         for (Finite action : actions) {
-            if (time > accDuration) {
+            if (time > accDuration && prevTime > accDuration) {
                 action.update(elapsed);
             }
 
             accDuration += action.getDuration();
-            if (prevTime > accDuration) {
-                action.update(elapsed);
-            }
         }
     }
 

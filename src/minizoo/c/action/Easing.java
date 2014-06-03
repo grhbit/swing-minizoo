@@ -5,6 +5,12 @@ import minizoo.c.Entity;
 public abstract class Easing extends Finite {
 
     @Override
+    public void clear() {
+        super.clear();
+        targetAction.clear();
+    }
+
+    @Override
     public float getDuration() {
         return getTargetAction().getDuration();
     }
