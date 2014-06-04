@@ -4,6 +4,14 @@ import minizoo.c.Entity;
 import minizoo.i.Task;
 
 public abstract class Action implements Task {
+    public void setIdentifier(String identifier) {
+        this.identifier = identifier;
+    }
+    public String getIdentifier() {
+        return identifier;
+    }
+    String identifier;
+
     public float getDuration() {
         return duration;
     }

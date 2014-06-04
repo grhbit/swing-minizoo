@@ -6,8 +6,12 @@ import java.awt.Shape;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.PriorityQueue;
 
+import minizoo.c.action.Action;
 import minizoo.c.core.Vector2d;
 import minizoo.i.Collider;
 import minizoo.i.Drawable;
@@ -85,20 +89,38 @@ public abstract class Entity implements Comparable<Entity>, Collider, Drawable, 
 
 	public void addChild(Entity entity, int zOrder) {
 		entity.zOrder = zOrder;
+        entity.parent = this;
 		children.add(entity);
 	}
 
 	public void removeChild(Entity entity) {
 		children.remove(entity);
+        entity.parent = null;
 	}
 
 	public PriorityQueue<Entity> getChildren() {
 		return children;
 	}
 
+    public void setParent(Entity parent) {
+        if (this.parent != null) {
+            this.parent.removeChild(this);
+        }
+
+        if (parent != null) {
+            parent.addChild(this);
+        }
+
+        this.parent = parent;
+    }
+    public Entity getParent() {
+        return parent;
+    }
+
     @Override
 	public void update(float elapsed) {
 		updatedTime += elapsed;
+        updateAction(elapsed);
 	}
 
 	public void setContentSize(Vector2d contentSize) {
@@ -175,6 +197,59 @@ public abstract class Entity implements Comparable<Entity>, Collider, Drawable, 
 		return transform;
 	}
 
+    // Action
+    private void updateAction(float elapsed) {
+        class ActionControl {
+            public ActionControl(ArrayList<Action> actions, float time) {
+                this.actions = actions;
+                this.time = time;
+            }
+
+            public void removeExpiredAction(float elapsed) {
+                float threshold = time + elapsed;
+
+                for (Iterator<Action> it = actions.iterator(); it.hasNext(); ) {
+                    if (it.next().getDuration() <= threshold) {
+                        it.remove();
+                    }
+                }
+            }
+            public void processAction(float elapsed) {
+                for (Action action : actions) {
+                    action.update(elapsed);
+                }
+            }
+
+            ArrayList<Action> actions;
+            float time;
+        }
+
+        ActionControl control = new ActionControl(actions, updatedTime-elapsed);
+        control.removeExpiredAction(0);
+        control.processAction(elapsed);
+        control.removeExpiredAction(elapsed);
+    }
+    public void runAction(Action action) {
+        action.setTarget(this);
+        action.clear();
+        actions.add(action);
+    }
+    public void runAction(Action action, String id) {
+        action.setIdentifier(id);
+        runAction(action);
+    }
+    public void stopAction(String id) {
+        for (Action action : actions) {
+            if (id.equals(action.getIdentifier())) {
+                actions.remove(action);
+            }
+        }
+    }
+    public void stopAllAction() {
+        actions.clear();
+    }
+    ArrayList<Action> actions = new ArrayList<Action>();
+
 	// Entity property
 	String name;
 	Vector2d contentSize = new Vector2d(0, 0);
@@ -192,7 +267,8 @@ public abstract class Entity implements Comparable<Entity>, Collider, Drawable, 
 	AffineTransform lastAffineTransform;
 
 	// Entity hierarchy
-	public PriorityQueue<Entity> children = new PriorityQueue<Entity>();
+    Entity parent = null;
+	PriorityQueue<Entity> children = new PriorityQueue<Entity>();
 	public static PriorityQueue<Entity> list = new PriorityQueue<Entity>();
 	public static void add(Entity entity) {
 		Entity.add(entity, -1);

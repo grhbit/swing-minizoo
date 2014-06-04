@@ -67,13 +67,12 @@ public class App implements ActionListener {
 
         Finite moving2 = new MoveBy(animal, 2.0f, 200, 200);
         Finite moving = new MoveBy(animal, 2.0f, -200, -200);
-        action = new Forever(new Sequence(new EaseInOutSine(moving2), new EaseInOutSine(moving)));
-        action.setTarget(animal);
+        Action action = (new Sequence(new EaseInOutSine(moving2), new EaseInOutSine(moving), new EaseInOutSine(new ScaleTo(animal, 2f, 1.25f, 1.25f)), new Targeted(background, new ScaleTo(background, 2f, 0.2f, 0.2f))));
+        animal.runAction(action);
 
 		FPSTimer fpsTimer = new FPSTimer();
 		Entity.add(fpsTimer, Integer.MAX_VALUE);
 	}
-    Action action = null;
 
 	public void run() {
 		init();
@@ -96,7 +95,6 @@ public class App implements ActionListener {
 	void MainLoop(float elapsed) {
 		this.Update(elapsed);
 
-        action.update(elapsed);
 		mainCanvas.update(elapsed);
 		mainCanvas.repaint();
 	}

@@ -1,5 +1,7 @@
 package minizoo.c.action;
 
+import minizoo.c.Entity;
+
 import java.util.ArrayList;
 
 public class Sequence extends Finite {
@@ -9,6 +11,14 @@ public class Sequence extends Finite {
 
         for (Finite action : actions) {
             this.actions.add(action);
+        }
+    }
+
+    @Override
+    public void setTarget(Entity target) {
+        super.setTarget(target);
+        for (Action action : actions) {
+            action.setTarget(target);
         }
     }
 
