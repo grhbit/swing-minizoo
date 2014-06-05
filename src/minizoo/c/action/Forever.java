@@ -13,21 +13,20 @@ public class Forever extends Action {
 
     @Override
     public void update(float elapsed) {
+        super.update(elapsed);
+
         if (targetAction.getDuration() == 0) {
             return;
         }
 
-        super.update(elapsed);
 
         if (targetAction.getDuration() <= targetAction.time) {
-            while (targetAction.getDuration() <= targetAction.time) {
-                targetAction.time -= targetAction.getDuration();
-            }
+            float remainder = targetAction.time % targetAction.getDuration();
+            targetAction.update(targetAction.getDuration() - remainder);
             targetAction.clear();
-            targetAction.update(targetAction.time + elapsed);
-        } else {
-            targetAction.update(elapsed);
+            targetAction.update(remainder);
         }
+        targetAction.update(elapsed);
     }
 
     void setTargetAction(Finite targetAction) {

@@ -17,7 +17,7 @@ public class Background extends Entity {
 	}
 
 	@Override
-	public boolean intersect(Point2D point) {
+	public boolean intersect(Point2D point, AffineTransform base) {
 		return false;
 	}
 

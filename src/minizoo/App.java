@@ -15,6 +15,7 @@ import minizoo.c.FPSTimer;
 import minizoo.c.Touch;
 import minizoo.c.action.*;
 import minizoo.c.action.easing.*;
+import minizoo.c.animal.sheep.Sheep;
 import minizoo.c.core.Vector2d;
 
 public class App implements ActionListener {
@@ -58,17 +59,16 @@ public class App implements ActionListener {
 		mainCanvas.addMouseMotionListener(mouse);
 
 		Background background = new Background("Background");
-		Entity.add(background);
+		Entity.add(background, Integer.MIN_VALUE);
 
 		Animal animal = new Animal("Animal");
         animal.setPosition(new Vector2d(400, 400));
 		animal.setContentSize(new Vector2d(100, 100));
 		Entity.add(animal, 2);
 
-        Finite moving2 = new MoveBy(animal, 2.0f, 200, 200);
-        Finite moving = new MoveBy(animal, 2.0f, -200, -200);
-        Action action = (new Sequence(new EaseInOutSine(moving2), new EaseInOutSine(moving), new EaseInOutSine(new ScaleTo(animal, 2f, 1.25f, 1.25f)), new Targeted(background, new ScaleTo(background, 2f, 0.2f, 0.2f))));
-        animal.runAction(action);
+        Sheep sheep = new Sheep("Sheep Prototype");
+        sheep.setPosition(new Vector2d(ScreenWidth/2.0, ScreenHeight/2.0));
+        Entity.add(sheep);
 
 		FPSTimer fpsTimer = new FPSTimer();
 		Entity.add(fpsTimer, Integer.MAX_VALUE);

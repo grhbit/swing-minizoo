@@ -23,12 +23,20 @@ public abstract class Entity implements Comparable<Entity>, Collider, Drawable, 
 		this.name = name;
 	}
 	public String toString() {
-		return "Entity " + name + " " + getPosition();
+		return "Entity:" + name + " " + getPosition();
 	}
 
 	@Override
-	public boolean intersect(Point2D point) {
-		AffineTransform affineTransform = getTransform();
+	public boolean intersect(Point2D point, AffineTransform base) {
+		AffineTransform affineTransform;
+
+        if (base == null) {
+            affineTransform = getTransform();
+        } else {
+            affineTransform = (AffineTransform)base.clone();
+            affineTransform.concatenate(getTransform());
+        }
+
 		Rectangle2D boxCollider = new Rectangle2D.Double(0, 0, getContentSize().x, getContentSize().y);
 		Shape transShaped = affineTransform.createTransformedShape(boxCollider);
 		
@@ -36,7 +44,7 @@ public abstract class Entity implements Comparable<Entity>, Collider, Drawable, 
 			return true;
 		} else {
 			for (Entity child : getChildren()) {
-				if (child.intersect(point)) {
+				if (child.intersect(point, affineTransform)) {
 					return true;
 				}
 			}
@@ -121,6 +129,10 @@ public abstract class Entity implements Comparable<Entity>, Collider, Drawable, 
 	public void update(float elapsed) {
 		updatedTime += elapsed;
         updateAction(elapsed);
+
+        for (Entity child : children) {
+            child.update(elapsed);
+        }
 	}
 
 	public void setContentSize(Vector2d contentSize) {
@@ -263,6 +275,9 @@ public abstract class Entity implements Comparable<Entity>, Collider, Drawable, 
 	AffineTransform transform = new AffineTransform();
 	boolean isDirty = true;
 
+    public float getUpdatedTime() {
+        return updatedTime;
+    }
 	float updatedTime;
 	AffineTransform lastAffineTransform;
 

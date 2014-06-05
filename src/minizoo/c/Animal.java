@@ -21,21 +21,19 @@ public class Animal extends Entity implements TouchListener {
 
 	@Override
 	public void Hover(boolean isHover) {
-		// TODO Auto-generated method stub
 		System.out.println("Hover " + isHover + " " + this.name);
 
 		if (isHover) {
-			scale.x = 1.2;
-			scale.y = 1.2;
+			scale.x *= 1.2;
+			scale.y *= 1.2;
 		} else {
-			scale.x = 1.0;
-			scale.y = 1.0;
+			scale.x /= 1.2;
+			scale.y /= 1.2;
 		}
 	}
 
 	@Override
 	public void Drag(Point2D point) {
-		//System.out.println("Drag " + point);
 		position.x = point.getX() - sx;
 		position.y = point.getY() - sy;
 	}

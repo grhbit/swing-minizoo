@@ -28,14 +28,12 @@ public class FPSTimer extends Entity {
 
 			updatedTime = 0;
 			frameCount = 0;
-
-            System.out.println(displayFrame);
 		}
 	}
 
 	@Override
 	public void visit(Graphics2D g2) {
-		//g2.setFont(font);
-		//g2.drawString("" + displayFrame, 0, 0);
+		g2.setFont(font);
+		g2.drawString("" + displayFrame, 0, 0);
 	}
 }
