@@ -7,14 +7,11 @@ import java.awt.event.ActionListener;
 import javax.swing.JFrame;
 import javax.swing.Timer;
 
-import minizoo.Canvas;
 import minizoo.c.Animal;
 import minizoo.c.Background;
 import minizoo.c.Entity;
 import minizoo.c.FPSTimer;
 import minizoo.c.Touch;
-import minizoo.c.action.*;
-import minizoo.c.action.easing.*;
 import minizoo.c.animal.sheep.Sheep;
 import minizoo.c.core.Vector2d;
 
