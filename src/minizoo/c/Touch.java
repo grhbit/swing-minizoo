@@ -17,7 +17,7 @@ public class Touch implements MouseListener, MouseMotionListener {
 	public final long DoubleClickElapse = 250;
 	
 	public void Update() {
-		if (current == null) {
+		if (current == null || currentDrag != null) {
 			return;
 		}
 
