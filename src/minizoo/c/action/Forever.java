@@ -1,9 +1,17 @@
 package minizoo.c.action;
 
+import minizoo.c.Entity;
+
 public class Forever extends Action {
 
     public Forever(Finite targetAction) {
         setTargetAction(targetAction);
+    }
+
+    @Override
+    public void clear() {
+        super.clear();
+        getTargetAction().clear();
     }
 
     @Override
@@ -29,10 +37,19 @@ public class Forever extends Action {
         targetAction.update(elapsed);
     }
 
-    void setTargetAction(Finite targetAction) {
+    @Override
+    public void setTarget(Entity target) {
+        getTargetAction().setTarget(target);
+    }
+    @Override
+    public Entity getTarget() {
+        return getTargetAction().getTarget();
+    }
+
+    public void setTargetAction(Finite targetAction) {
         this.targetAction = targetAction;
     }
-    Finite getTargetAction() {
+    public Finite getTargetAction() {
         return targetAction;
     }
 

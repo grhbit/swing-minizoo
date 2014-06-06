@@ -4,6 +4,10 @@ import minizoo.c.Entity;
 
 public abstract class Easing extends Finite {
 
+    public Easing(Finite targetAction) {
+        setTargetAction(targetAction);
+    }
+
     @Override
     public void clear() {
         super.clear();
@@ -23,10 +27,6 @@ public abstract class Easing extends Finite {
     @Override
     public Entity getTarget() {
         return targetAction.getTarget();
-    }
-
-    public Easing(Finite targetAction) {
-        setTargetAction(targetAction);
     }
 
     public Finite getTargetAction() {

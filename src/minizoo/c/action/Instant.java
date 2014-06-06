@@ -3,6 +3,11 @@ package minizoo.c.action;
 import minizoo.c.Entity;
 
 public class Instant extends Finite {
+
+    public Instant(Finite targetAction) {
+        setTargetAction(targetAction);
+    }
+
     @Override
     public void clear() {
         super.clear();
@@ -18,14 +23,9 @@ public class Instant extends Finite {
     public void setTarget(Entity target) {
         targetAction.setTarget(target);
     }
-
     @Override
     public Entity getTarget() {
         return targetAction.getTarget();
-    }
-
-    public Instant(Finite targetAction) {
-        setTargetAction(targetAction);
     }
 
     public Finite getTargetAction() {

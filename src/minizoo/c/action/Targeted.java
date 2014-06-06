@@ -3,33 +3,56 @@ package minizoo.c.action;
 import minizoo.c.Entity;
 
 public class Targeted extends Finite {
-    public Targeted(Entity target, Action applyingAction) {
-        this.otherTarget = target;
-        this.applyingAction = applyingAction;
+    public Targeted(Entity overrideTarget, Finite targetAction) {
+        setOverrideTarget(overrideTarget);
+        setTargetAction(targetAction);
+        getTargetAction().setTarget(getOverrideTarget());
+    }
 
-        setTarget(target);
+    @Override
+    public void clear() {
+        super.clear();
+        getTargetAction().clear();
     }
 
     @Override
     public void setTarget(Entity target) {
-        this.target = target;
-        applyingAction.setTarget(otherTarget);
+        getTargetAction().setTarget(getOverrideTarget());
+    }
+    @Override
+    public Entity getTarget() {
+        return getOverrideTarget();
     }
 
     @Override
     public void update(float elapsed) {
-        applyingAction.update(elapsed);
+        getTargetAction().update(elapsed);
     }
 
     @Override
-    public void sample(float t) { }
+    public void sample(float t) {
+        getTargetAction().sample(t);
+    }
 
     @Override
     public float getDuration() {
-        return applyingAction.getDuration();
+        return getTargetAction().getDuration();
     }
 
-    Entity otherTarget;
-    Action applyingAction;
+    public void setTargetAction(Finite targetAction) {
+        this.targetAction = targetAction;
+    }
+    public Finite getTargetAction() {
+        return targetAction;
+    }
 
+    public void setOverrideTarget(Entity overrideTarget) {
+        this.overrideTarget = overrideTarget;
+    }
+    public Entity getOverrideTarget() {
+        return overrideTarget;
+    }
+
+    Entity overrideTarget;
+    Finite targetAction;
 }

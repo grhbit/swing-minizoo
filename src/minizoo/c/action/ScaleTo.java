@@ -1,18 +1,15 @@
 package minizoo.c.action;
 
-import minizoo.c.Entity;
 import minizoo.c.core.Vector2d;
 
 public class ScaleTo extends Finite {
 
-    public ScaleTo (Entity target, Vector2d to) {
-        setTarget(target);
-        this.to = to.clone();
-        from = getTarget().getScale().clone();
-    }
-    public ScaleTo (Entity target, float duration, float sx, float sy) {
-        this(target, new Vector2d(sx, sy));
+    public ScaleTo (float duration, Vector2d to) {
         this.duration = duration;
+        this.to = to.clone();
+    }
+    public ScaleTo (float duration, float sx, float sy) {
+        this(duration, new Vector2d(sx, sy));
     }
 
     @Override

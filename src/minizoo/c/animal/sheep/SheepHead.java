@@ -1,10 +1,7 @@
 package minizoo.c.animal.sheep;
 
 import minizoo.c.Entity;
-import minizoo.c.action.Forever;
-import minizoo.c.action.Instant;
-import minizoo.c.action.MoveBy;
-import minizoo.c.action.Sequence;
+import minizoo.c.action.*;
 import minizoo.c.action.easing.EaseInOutSine;
 import minizoo.c.core.Vector2d;
 
@@ -33,9 +30,9 @@ public class SheepHead extends Entity {
                 new Forever(
                         new Sequence(
                                 new Instant(
-                                        new MoveBy(this, 0.13f, 20f, 0f)),
+                                        new MoveBy(0.13f, 20f, 0f)),
                                 new EaseInOutSine(
-                                        new MoveBy(this, 0.13f, -20f, 0f))
+                                        new MoveBy(0.13f, -20f, 0f))
                         )
                 )
         );
