@@ -1,7 +1,6 @@
 package minizoo.c;
 
 import minizoo.App;
-import minizoo.c.Entity;
 import minizoo.i.Collider;
 import minizoo.i.TouchListener;
 
@@ -61,8 +60,8 @@ public class Touch implements MouseListener, MouseMotionListener {
 	boolean isWaitDoubleClick = false;
 	
 	void setCurrentTouchPosition(MouseEvent mouseEvent) {
-		double ratioX = (double)App.Instance().GetCanvas().getWidth()/App.ScreenWidth;
-		double ratioY = (double)App.Instance().GetCanvas().getHeight()/App.ScreenHeight;
+		double ratioX = (double)App.Instance().getCanvas().getWidth()/App.ScreenWidth;
+		double ratioY = (double)App.Instance().getCanvas().getHeight()/App.ScreenHeight;
 		current = new Point2D.Double(mouseEvent.getX() / ratioX, mouseEvent.getY() / ratioY);
 	}
 
@@ -134,13 +133,14 @@ public class Touch implements MouseListener, MouseMotionListener {
 	@Override
 	public void mouseReleased(MouseEvent arg0) {
 		pressed = false;
-		currentDrag = null;
 
 		setCurrentTouchPosition(arg0);
 		if (currentDrag != null && currentDrag instanceof TouchListener) {
 			TouchListener touchListener = (TouchListener)currentDrag;
 			touchListener.Press(false, current);
 		}
+
+        currentDrag = null;
 	}
 
 	@Override
