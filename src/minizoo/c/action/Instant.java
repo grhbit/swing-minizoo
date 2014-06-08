@@ -4,6 +4,9 @@ import minizoo.c.Entity;
 
 public class Instant extends Finite {
 
+    public static Instant c(Finite targetAction) {
+        return new Instant(targetAction);
+    }
     public Instant(Finite targetAction) {
         setTargetAction(targetAction);
     }

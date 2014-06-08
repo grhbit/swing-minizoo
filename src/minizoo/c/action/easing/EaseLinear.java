@@ -5,6 +5,9 @@ import minizoo.c.action.Easing;
 
 public class EaseLinear extends Easing {
 
+    public static EaseLinear c(Finite targetAction) {
+        return new EaseLinear(targetAction);
+    }
     public EaseLinear(Finite targetAction) {
         super(targetAction);
     }

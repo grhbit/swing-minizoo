@@ -3,6 +3,9 @@ package minizoo.c.action;
 import minizoo.c.Entity;
 
 public class Targeted extends Finite {
+    public static Targeted c(Entity overrideTarget, Finite targetAction) {
+        return new Targeted(overrideTarget, targetAction);
+    }
     public Targeted(Entity overrideTarget, Finite targetAction) {
         setOverrideTarget(overrideTarget);
         setTargetAction(targetAction);

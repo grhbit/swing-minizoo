@@ -2,6 +2,9 @@ package minizoo.c.action;
 
 public class RandomDelay extends Finite {
 
+    public static RandomDelay c(float min, float max) {
+        return new RandomDelay(min, max);
+    }
     public RandomDelay(float min, float max) {
         this.min = min;
         this.max = max;

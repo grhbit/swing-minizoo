@@ -6,6 +6,9 @@ import java.util.ArrayList;
 
 public class Sequence extends Finite {
 
+    public static Sequence c(Finite... actions) {
+        return new Sequence(actions);
+    }
     public Sequence(Finite... actions) {
         this.actions = new ArrayList<Finite>();
 

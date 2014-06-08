@@ -4,6 +4,9 @@ import minizoo.c.action.Easing;
 import minizoo.c.action.Finite;
 
 public class EaseOutSine extends Easing {
+    public static EaseOutSine c(Finite targetAction) {
+        return new EaseOutSine(targetAction);
+    }
     public EaseOutSine(Finite targetAction) {
         super(targetAction);
     }

@@ -6,6 +6,9 @@ import java.util.ArrayList;
 
 public class Spawn extends Finite {
 
+    public static Spawn c(Finite... actions) {
+        return new Spawn(actions);
+    }
     public Spawn(Finite... actions) {
         this.actions = new ArrayList<Finite>();
 

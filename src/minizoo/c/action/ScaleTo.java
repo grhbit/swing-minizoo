@@ -4,6 +4,12 @@ import minizoo.c.core.Vector2d;
 
 public class ScaleTo extends Finite {
 
+    public static ScaleTo c(float duration, Vector2d to) {
+        return new ScaleTo(duration, to);
+    }
+    public static ScaleTo c(float duration, float sx, float sy) {
+        return new ScaleTo(duration, sx, sy);
+    }
     public ScaleTo (float duration, Vector2d to) {
         this.duration = duration;
         this.to = to.clone();

@@ -4,6 +4,9 @@ import minizoo.c.Entity;
 
 public class Forever extends Action {
 
+    public static Forever c(Finite targetAction) {
+        return new Forever(targetAction);
+    }
     public Forever(Finite targetAction) {
         setTargetAction(targetAction);
     }

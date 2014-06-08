@@ -4,6 +4,12 @@ import minizoo.c.core.Vector2d;
 
 public class MoveBy extends Finite {
 
+    public static MoveBy c(float duration, Vector2d relativePos) {
+        return new MoveBy(duration, relativePos);
+    }
+    public static MoveBy c(float duration, float rx, float ry) {
+        return new MoveBy(duration, rx, ry);
+    }
     public MoveBy(float duration, Vector2d relativePos) {
         this.duration = duration;
         this.relativePos = relativePos.clone();
