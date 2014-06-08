@@ -13,10 +13,10 @@ public class SheepBody extends Entity {
 
         @Override
         public void visit(Graphics2D g2) {
-            g2.setColor(Sheep.subBrandColor);
+            g2.setColor(getTintedColor(Sheep.subBrandColor));
             g2.fillRect(0, 0, 439, 241);
 
-            g2.setColor(Sheep.brandColor);
+            g2.setColor(getTintedColor(Sheep.brandColor));
             g2.fillRect(2, 37, 395, 206);
         }
     }

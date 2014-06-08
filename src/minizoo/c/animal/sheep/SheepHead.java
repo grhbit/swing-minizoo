@@ -40,14 +40,14 @@ public class SheepHead extends Entity {
 
     @Override
     public void visit(Graphics2D g2) {
-        g2.setColor(Sheep.subBrandColor);
+        g2.setColor(getTintedColor(Sheep.subBrandColor));
         g2.fillRect(0, 0, 205, 196);
 
-        g2.setColor(Sheep.brandColor);
+        g2.setColor(getTintedColor(Sheep.brandColor));
         g2.fillRect(0, 19, 186, 184);
         g2.fillRect(6, 24, 175, 175);
 
-        g2.setColor(Sheep.skinColor);
+        g2.setColor(getTintedColor(Sheep.skinColor));
         g2.fillRect(6, 48, 176, 106);
         g2.fillRect(31, 48, 122, 150);
     }

@@ -19,10 +19,10 @@ public class SheepMouse extends Entity {
 
     @Override
     public void visit(Graphics2D g2) {
-        g2.setColor(Sheep.mouseColor);
+        g2.setColor(getTintedColor(Sheep.mouseColor));
         g2.fillRect(0, 0, 47, 49);
 
-        g2.setColor(Sheep.tougueColor);
+        g2.setColor(getTintedColor(Sheep.tougueColor));
         g2.fillRect(1, 21, 45, 27);
     }
 }

@@ -24,10 +24,10 @@ public class SheepEye extends Entity {
 
     @Override
     public void visit(Graphics2D g2) {
-        g2.setColor(Sheep.whiteOfTheEyeColor);
+        g2.setColor(getTintedColor(Sheep.whiteOfTheEyeColor));
         g2.fillRect(0, 0, 60, 35);
 
-        g2.setColor(Sheep.softBlackColor);
+        g2.setColor(getTintedColor(Sheep.softBlackColor));
         g2.fillRect(0, 0, 30, 35);
     }
 

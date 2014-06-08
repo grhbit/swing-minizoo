@@ -15,6 +15,11 @@ public class Sheep extends Animal {
     public final static Color tougueColor = new Color(202, 105, 105); // tougue color
     public final static Color hoofColor = new Color(64, 43, 21); // hoof color
 
+    @Override
+    public void update(float elapsed) {
+        super.update(elapsed);
+    }
+
     public Sheep(String name) {
         super(name);
 

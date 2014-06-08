@@ -23,13 +23,13 @@ public class SheepLeg extends Entity {
 
     @Override
     public void visit(Graphics2D g2) {
-        g2.setColor(Sheep.hoofColor);
+        g2.setColor(getTintedColor(Sheep.hoofColor));
         g2.fillRect(7, 116, 52, 12);
 
-        g2.setColor(Sheep.skinColor);
+        g2.setColor(getTintedColor(Sheep.skinColor));
         g2.fillRect(4, 41, 55, 76);
 
-        g2.setColor(isNear? Sheep.brandColor : Sheep.subBrandColor);
+        g2.setColor(getTintedColor(isNear? Sheep.brandColor : Sheep.subBrandColor));
         g2.fillRect(0, 0, 64, 59);
     }
 
