@@ -26,16 +26,9 @@ public class SheepHead extends Entity {
         mouse.setPosition(new Vector2d(91, 176));
         this.addChild(mouse);
 
-        this.runAction(
-                new Forever(
-                        new Sequence(
-                                new Instant(
-                                        new MoveBy(0.13f, 20f, 0f)),
-                                new EaseInOutSine(
-                                        new MoveBy(0.13f, -20f, 0f))
-                        )
-                )
-        );
+        this.runAction(Forever.c( Sequence.c(
+                                Instant.c( MoveBy.c(0.13f, 20f, 0f)),
+                                EaseInOutSine.c( MoveBy.c(0.13f, -20f, 0f)))));
     }
 
     @Override

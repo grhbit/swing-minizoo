@@ -45,7 +45,7 @@ public class Background extends Entity {
         sun.setPosition(new Vector2d(1136, 108));
         this.addChild(sun, 0);
 
-        // this.runAction(new Forever(new Sequence(new EaseInSine(new RotateTo(1f, (float) -Math.PI)), new Delay(3f))));
+        this.runAction(Forever.c(Sequence.c(EaseInSine.c(RotateTo.c(0.8f, (float) -Math.PI)), Delay.c(3f))));
 	}
 
     Sprite sprBackground;
