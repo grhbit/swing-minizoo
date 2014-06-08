@@ -1,14 +1,19 @@
 package minizoo.c.animal;
 
+import com.sun.corba.se.impl.orbutil.graph.Graph;
 import minizoo.App;
 import minizoo.c.Animal;
 import minizoo.c.Entity;
+import minizoo.c.action.RotateTo;
 import minizoo.c.action.ScaleTo;
+import minizoo.c.action.Spawn;
+import minizoo.c.action.TintTo;
 import minizoo.c.action.easing.EaseInOutSine;
 import minizoo.c.core.Vector2d;
 import minizoo.i.AnimalFactory;
 import minizoo.i.TouchListener;
 
+import java.awt.*;
 import java.awt.geom.Point2D;
 import java.awt.image.BufferedImage;
 
@@ -25,15 +30,20 @@ public class AnimalSpawnButton extends Entity implements TouchListener {
     BufferedImage image;
 
     @Override
+    public void beforeDraw(Graphics2D g2) {
+        super.beforeDraw(g2);
+    }
+
+    @Override
     public void Hover(boolean isHover) {
         if (isHover) {
             this.stopAction("hover:false");
             this.stopAction("press:true");
-            this.runAction(new EaseInOutSine(new ScaleTo(0.2f, new Vector2d(1f, 1f))), "hover:true");
+            this.runAction(Spawn.c(EaseInOutSine.c(ScaleTo.c(0.2f, 1f, 1f))), "hover:true");
         } else {
             this.stopAction("hover:true");
             this.stopAction("press:true");
-            this.runAction(new EaseInOutSine(new ScaleTo(0.2f, new Vector2d(0.3f, 0.3f))), "hover:false");
+            this.runAction(Spawn.c(EaseInOutSine.c(ScaleTo.c(0.2f, 0.3f, 0.3f))), "hover:false");
         }
     }
 

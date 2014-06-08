@@ -9,6 +9,7 @@ import javax.swing.Timer;
 
 import minizoo.c.Animal;
 import minizoo.c.animal.AnimalSpawnButton;
+import minizoo.c.animal.PenguinFactory;
 import minizoo.c.animal.SheepFactory;
 import minizoo.c.background.Background;
 import minizoo.c.Entity;
@@ -74,9 +75,13 @@ public class App implements ActionListener {
         musicPlayer.setPosition(new Vector2d(100, 500));
         Entity.add(musicPlayer);
 
-        AnimalSpawnButton spawn = new AnimalSpawnButton(new SheepFactory());
-        spawn.setPosition(new Vector2d(100, 300));
-        Entity.add(spawn, 0);
+        AnimalSpawnButton sheepSpawner = new AnimalSpawnButton(new SheepFactory());
+        sheepSpawner.setPosition(new Vector2d(100, 300));
+        Entity.add(sheepSpawner, 0);
+
+        AnimalSpawnButton penguinSpanwer = new AnimalSpawnButton(new PenguinFactory());
+        penguinSpanwer.setPosition(new Vector2d(100, 400));
+        Entity.add(penguinSpanwer, 0);
 
 		FPSTimer fpsTimer = new FPSTimer();
 		Entity.add(fpsTimer, Integer.MAX_VALUE);
