@@ -24,6 +24,7 @@ public abstract class Action implements Task {
     public void update(float elapsed) {
         time += elapsed;
     }
+    public float getTime() { return time; }
     float time = 0f;
 
     public Entity getTarget() {

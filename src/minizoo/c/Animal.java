@@ -1,11 +1,9 @@
 package minizoo.c;
 
-import java.awt.Graphics2D;
+import java.awt.*;
 import java.awt.geom.Point2D;
 
 import minizoo.e.State;
-import minizoo.i.Collider;
-import minizoo.i.Drawable;
 import minizoo.i.TouchListener;
 
 public class Animal extends Entity implements TouchListener {
@@ -24,11 +22,11 @@ public class Animal extends Entity implements TouchListener {
 		System.out.println("Hover " + isHover + " " + this.name);
 
 		if (isHover) {
-			scale.x *= 1.2;
-			scale.y *= 1.2;
+			scale.x *= 1.05;
+			scale.y *= 1.05;
 		} else {
-			scale.x /= 1.2;
-			scale.y /= 1.2;
+			scale.x /= 1.05;
+			scale.y /= 1.05;
 		}
 	}
 
@@ -49,7 +47,6 @@ public class Animal extends Entity implements TouchListener {
 
 	@Override
 	public void Click() {
-		setRotation(getRotation() + 20);
 	}
 
 	@Override
@@ -60,7 +57,7 @@ public class Animal extends Entity implements TouchListener {
 	@Override
 	public void visit(Graphics2D g2) {
 		super.visit(g2);
-		g2.setColor(getColor());
+		g2.setColor(getTintedColor(Color.white));
 		g2.fillRect(0, 0, (int)getContentSize().x, (int)getContentSize().y);
 	}
 

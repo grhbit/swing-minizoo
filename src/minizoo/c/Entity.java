@@ -6,7 +6,6 @@ import java.awt.Shape;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.PriorityQueue;
@@ -174,13 +173,26 @@ public abstract class Entity implements Comparable<Entity>, Collider, Drawable, 
 	public double getRotation() {
 		return rotation;
 	}
-	
-	public void setColor(Color color) {
-		this.color = color;
+
+    @Override
+	public void setTint(Color tint) {
+		this.tint = tint;
 	}
-	public Color getColor() {
-		return color;
+    @Override
+	public Color getTint() {
+		return tint;
 	}
+    public Color getTintedColor(Color color) {
+        if (getParent() != null) {
+            return getParent().getTintedColor(color);
+        } else {
+            return new Color(
+                    (color.getRed() * getTint().getRed()) / 255,
+                    (color.getGreen() * getTint().getGreen()) / 255,
+                    (color.getBlue() * getTint().getBlue()) / 255,
+                    (color.getAlpha() * getTint().getAlpha()) / 255);
+        }
+    }
 
 	public void setZOrder(int zOrder) {
 		this.zOrder = zOrder;
@@ -218,10 +230,9 @@ public abstract class Entity implements Comparable<Entity>, Collider, Drawable, 
             }
 
             public void removeExpiredAction(float elapsed) {
-                float threshold = time + elapsed;
-
                 for (Iterator<Action> it = actions.iterator(); it.hasNext(); ) {
-                    if (it.next().getDuration() <= threshold) {
+                    Action action = it.next();
+                    if (action.getDuration() <= (action.getTime()+elapsed)) {
                         it.remove();
                     }
                 }
@@ -251,9 +262,9 @@ public abstract class Entity implements Comparable<Entity>, Collider, Drawable, 
         runAction(action);
     }
     public void stopAction(String id) {
-        for (Action action : actions) {
-            if (id.equals(action.getIdentifier())) {
-                actions.remove(action);
+        for (Iterator<Action> it = actions.iterator(); it.hasNext(); ) {
+            if (id.equals(it.next().getIdentifier())) {
+                it.remove();
             }
         }
     }
@@ -269,7 +280,7 @@ public abstract class Entity implements Comparable<Entity>, Collider, Drawable, 
 	Vector2d anchor = new Vector2d(0.5, 0.5);
 	Vector2d scale = new Vector2d(1, 1);
 	double rotation = 0.0;
-	Color color = Color.white;
+	Color tint = Color.white;
 	int zOrder = -1;
 
 	AffineTransform transform = new AffineTransform();

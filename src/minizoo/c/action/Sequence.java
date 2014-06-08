@@ -46,6 +46,10 @@ public class Sequence extends Finite {
 
         float accDuration = 0f;
         for (Finite action : actions) {
+            if (time > accDuration && prevTime < accDuration) {
+                action.clear();
+            }
+
             if (time > accDuration && prevTime > accDuration) {
                 action.update(elapsed);
             }
