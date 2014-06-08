@@ -134,6 +134,9 @@ public abstract class Entity implements Comparable<Entity>, Collider, Drawable, 
         }
 	}
 
+    public void setContentSize(float sx, float sy) {
+        setContentSize(new Vector2d(sx, sy));
+    }
 	public void setContentSize(Vector2d contentSize) {
 		this.contentSize = contentSize;
 		isDirty = true;
@@ -142,6 +145,9 @@ public abstract class Entity implements Comparable<Entity>, Collider, Drawable, 
 		return contentSize;
 	}
 
+    public void setPosition(float px, float py) {
+        setPosition(new Vector2d(px, py));
+    }
 	public void setPosition(Vector2d position) {
 		this.position = position;
 		isDirty = true;
@@ -150,6 +156,9 @@ public abstract class Entity implements Comparable<Entity>, Collider, Drawable, 
 		return position;
 	}
 
+    public void setAnchor(float x, float y) {
+        setAnchor(new Vector2d(x, y));
+    }
 	public void setAnchor(Vector2d anchor) {
 		this.anchor = anchor;
 		isDirty = true;
@@ -158,6 +167,9 @@ public abstract class Entity implements Comparable<Entity>, Collider, Drawable, 
 		return anchor;
 	}
 
+    public void setScale(float sx, float sy) {
+        setScale(new Vector2d(sx, sy));
+    }
 	public void setScale(Vector2d scale) {
 		this.scale = scale;
 		isDirty = true;

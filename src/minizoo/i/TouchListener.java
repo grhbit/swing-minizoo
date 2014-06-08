@@ -8,4 +8,5 @@ public interface TouchListener {
 	public void Press(boolean isPress, Point2D point);
 	public void Click();
 	public void DoubleClick();
+    public boolean isNeededSupportingDoubleClicking();
 }

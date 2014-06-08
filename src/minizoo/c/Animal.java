@@ -54,7 +54,12 @@ public class Animal extends Entity implements TouchListener {
 		System.out.println("Double Click");
 	}
 
-	@Override
+    @Override
+    public boolean isNeededSupportingDoubleClicking() {
+        return false;
+    }
+
+    @Override
 	public void visit(Graphics2D g2) {
 		super.visit(g2);
 		g2.setColor(getTintedColor(Color.white));

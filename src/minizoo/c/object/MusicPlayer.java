@@ -66,6 +66,11 @@ public class MusicPlayer extends Entity implements TouchListener {
 
     }
 
+    @Override
+    public boolean isNeededSupportingDoubleClicking() {
+        return false;
+    }
+
     Sprite sprRadio;
     Audio audio;
 }

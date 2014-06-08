@@ -34,24 +34,56 @@ public class Touch implements MouseListener, MouseMotionListener {
             }
         }
 
-		if (currHovered != _currHovered) {
-			if ((currHovered!=null) && currHovered instanceof TouchListener) {
-				((TouchListener)currHovered).Hover(false);
-			}
-			
-			if ((_currHovered!=null) && _currHovered instanceof TouchListener) {
-				((TouchListener)_currHovered).Hover(true);
-			}
-			
-			if (_currHovered != null) {
-				lastHovered = _currHovered;				
-			}
-			
-			currHovered = _currHovered;
-		}
+        setCurrentHover(_currHovered);
 	}
-	
+
+    public Point2D getCurrent() {
+        return current;
+    }
 	Point2D current;
+
+    public Entity getLastHovered() {
+        return lastHovered;
+    }
+    public Entity getCurrentDrag() {
+        return currentDrag;
+    }
+    public void setCurrentDrag(Entity _currentDrag) {
+        if (pressed) {
+            if (currentDrag != null && currentDrag instanceof TouchListener) {
+                TouchListener touchListener = (TouchListener)currentDrag;
+                touchListener.Press(false, current);
+            }
+
+            if (_currentDrag != null && _currentDrag instanceof TouchListener) {
+                TouchListener touchListener = (TouchListener)_currentDrag;
+                touchListener.Press(true, current);
+            }
+
+            currentDrag = _currentDrag;
+        }
+    }
+
+    public Entity getCurrentHover() {
+        return currHovered;
+    }
+    public void setCurrentHover(Entity currentHover) {
+        if (currHovered != currentHover) {
+            if ((currHovered!=null) && currHovered instanceof TouchListener) {
+                ((TouchListener)currHovered).Hover(false);
+            }
+
+            if ((currentHover!=null) && currentHover instanceof TouchListener) {
+                ((TouchListener)currentHover).Hover(true);
+            }
+
+            if (currentHover != null) {
+                lastHovered = currentHover;
+            }
+
+            currHovered = currentHover;
+        }
+    }
 	
 	Entity lastHovered;
 	Entity currHovered;
@@ -59,7 +91,7 @@ public class Touch implements MouseListener, MouseMotionListener {
 	boolean pressed;	
 	boolean isWaitDoubleClick = false;
 	
-	void setCurrentTouchPosition(MouseEvent mouseEvent) {
+	public void setCurrentTouchPosition(MouseEvent mouseEvent) {
 		double ratioX = (double)App.Instance().getCanvas().getWidth()/App.ScreenWidth;
 		double ratioY = (double)App.Instance().getCanvas().getHeight()/App.ScreenHeight;
 		current = new Point2D.Double(mouseEvent.getX() / ratioX, mouseEvent.getY() / ratioY);
@@ -75,12 +107,21 @@ public class Touch implements MouseListener, MouseMotionListener {
 			isWaitDoubleClick = false;
 			// Double Click
 			if (currHovered!=null && currHovered instanceof TouchListener) {
-				TouchListener touchListener = null;
+				TouchListener touchListener;
 				touchListener = (TouchListener)currHovered;
 				touchListener.DoubleClick();
 			}
 
 		} else {
+            if (currHovered!=null && currHovered instanceof TouchListener) {
+                TouchListener touchListener;
+                touchListener = (TouchListener)currHovered;
+                if (touchListener.isNeededSupportingDoubleClicking() == false) {
+                    touchListener.Click();
+                    return;
+                }
+            }
+
 			isWaitDoubleClick = true;
 			Timer t = new Timer("doubleClickTimer",false);
 			t.schedule(new TimerTask() {

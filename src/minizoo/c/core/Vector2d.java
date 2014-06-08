@@ -15,6 +15,10 @@ public class Vector2d {
         this.x = vec2d.x;
         this.y = vec2d.y;
     }
+    public Vector2d(Point2D point) {
+        this.x = point.getX();
+        this.y = point.getY();
+    }
 
     public void add(Vector2d rhs) {
         this.x += rhs.x;
