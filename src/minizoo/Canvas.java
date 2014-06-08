@@ -57,11 +57,6 @@ public class Canvas extends JComponent {
 			}
 		}
 
-        // Motion Blur Code
-        // backBufferGraphics2D.setTint(new Color(0, 0, 0, 128));
-        // backBufferGraphics2D.setComposite(AlphaComposite.getInstance(AlphaComposite.DST_OUT));
-        // backBufferGraphics2D.fillRect(0, 0, backBuffer.getWidth(), backBuffer.getHeight());
-
         backBufferGraphic.dispose();
 
 		// Present

@@ -1,13 +1,10 @@
 package minizoo.c.animal;
 
-import com.sun.corba.se.impl.orbutil.graph.Graph;
 import minizoo.App;
 import minizoo.c.Animal;
 import minizoo.c.Entity;
-import minizoo.c.action.RotateTo;
 import minizoo.c.action.ScaleTo;
 import minizoo.c.action.Spawn;
-import minizoo.c.action.TintTo;
 import minizoo.c.action.easing.EaseInOutSine;
 import minizoo.c.core.Vector2d;
 import minizoo.i.AnimalFactory;
