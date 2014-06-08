@@ -8,12 +8,13 @@ import javax.swing.JFrame;
 import javax.swing.Timer;
 
 import minizoo.c.Animal;
-import minizoo.c.Background;
+import minizoo.c.background.Background;
 import minizoo.c.Entity;
 import minizoo.c.FPSTimer;
 import minizoo.c.Touch;
 import minizoo.c.animal.sheep.Sheep;
 import minizoo.c.core.Vector2d;
+import minizoo.c.object.MusicPlayer;
 
 public class App implements ActionListener {
 	public final static String Title = "Our Mini Zoo!";
@@ -67,6 +68,10 @@ public class App implements ActionListener {
         sheep.setPosition(new Vector2d(ScreenWidth/2.0, ScreenHeight/2.0));
         Entity.add(sheep);
 
+        MusicPlayer musicPlayer = new MusicPlayer("");
+        musicPlayer.setPosition(new Vector2d(100, 500));
+        Entity.add(musicPlayer);
+
 		FPSTimer fpsTimer = new FPSTimer();
 		Entity.add(fpsTimer, Integer.MAX_VALUE);
 	}
@@ -106,7 +111,7 @@ public class App implements ActionListener {
 		App.Instance().run();
 	}
 	
-	public Canvas GetCanvas() {
+	public Canvas getCanvas() {
 		return mainCanvas;
 	}
 
@@ -115,7 +120,7 @@ public class App implements ActionListener {
 	Canvas mainCanvas;
 	Timer mainLoopTimer;
 	Touch mouse;
-	public Touch GetTouchSystem() {
+	public Touch getTouch() {
 		return mouse;
 	}
 
