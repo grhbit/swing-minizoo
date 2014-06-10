@@ -20,7 +20,7 @@ public class Background extends Entity {
 	public void update(float elapsed) {
         super.update(elapsed);
 
-        int fac = 255 - Math.max(0, (int)(90 * (Math.sin(this.getRotation() - Math.PI/2)+1)));
+        int fac = 255 - Math.max(0, (int)(55 * (Math.sin(this.getRotation() - Math.PI/2)+1)));
         App.Instance().getCanvas().setGlobalTint(new Color(fac, fac, fac));
 	}
 

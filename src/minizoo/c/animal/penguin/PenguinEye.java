@@ -4,6 +4,7 @@ import minizoo.c.Entity;
 
 import java.awt.*;
 
+@SuppressWarnings("UnusedDeclaration")
 public class PenguinEye extends Entity {
     public class PenguinPupil extends Entity {
         public PenguinPupil(String name) {

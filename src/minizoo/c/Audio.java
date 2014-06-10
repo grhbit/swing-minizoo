@@ -1,45 +1,47 @@
 package minizoo.c;
 
-import sun.audio.AudioPlayer;
-import sun.audio.AudioStream;
-import sun.audio.ContinuousAudioDataStream;
+import javazoom.jl.decoder.JavaLayerException;
 
+import java.io.BufferedInputStream;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.IOException;
+
+import javazoom.jl.player.Player;
 
 public class Audio extends Entity {
     public Audio(String filename) {
         super("Audio:" + filename);
-
-        try {
-            in = new FileInputStream(filename);
-            as = new AudioStream(in);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
         this.filename = filename;
     }
 
     public void play() {
         try {
-            in = new FileInputStream(filename);
-            as = new AudioStream(in);
-            AudioPlayer.player.start(as);
-        } catch (IOException e) {
+            FileInputStream fis = new FileInputStream(filename);
+            BufferedInputStream bis = new BufferedInputStream(fis);
+            player = new Player(bis);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (JavaLayerException e) {
             e.printStackTrace();
         }
+
+        new Thread() {
+            public void run() {
+                try {
+                    player.play();
+                } catch (JavaLayerException e) {
+                    e.printStackTrace();
+                }
+            }
+        }.start();
     }
 
     public void stop() {
-        AudioPlayer.player.stop(as);
+        if (player!=null) {
+            player.close();
+        }
     }
 
-    FileInputStream in;
-    ContinuousAudioDataStream cas;
-    AudioStream as;
+    Player player;
     String filename;
 }

@@ -4,6 +4,7 @@ import minizoo.c.Entity;
 
 import java.awt.*;
 
+@SuppressWarnings("UnusedDeclaration")
 public class PenguinBody extends Entity {
     public class PenguinBodyInternal extends Entity {
         public PenguinBodyInternal(String name) {
@@ -13,29 +14,29 @@ public class PenguinBody extends Entity {
         @Override
         public void visit(Graphics2D g2) {
             g2.setColor(getTintedColor(Penguin.brandColor));
-            g2.fillRoundRect(0, 0, 182, 310, 128, 128);
+            g2.fillRoundRect(0, 0, 182, 250, 128, 128);
 
             g2.setColor(getTintedColor(Penguin.bodyPointColor));
-            g2.fillRoundRect(0, 65, 158, 244, 64, 64);
+            g2.fillRoundRect(0, 65, 158, 184, 64, 64);
 
             g2.setColor(getTintedColor(Penguin.whiteColor));
-            g2.fillRoundRect(0, 72, 152, 238, 64, 64);
+            g2.fillRoundRect(0, 72, 152, 178, 64, 64);
         }
     }
 
     public PenguinBody(String name) {
         super(name);
 
-        this.setContentSize(182, 310);
+        this.setContentSize(182, 250);
 
         leftLeg = new PenguinLeg(name + ":leftLeg");
         leftLeg.setAnchor(49f/73f, 14f/66f);
-        leftLeg.setPosition(129, 299);
+        leftLeg.setPosition(129, 239);
         this.addChild(leftLeg, -3);
 
         rightLeg = new PenguinLeg(name + ":rightLeg");
         rightLeg.setAnchor(49f/73f, 14f/66f);
-        rightLeg.setPosition(43, 299);
+        rightLeg.setPosition(43, 239);
         this.addChild(rightLeg, -3);
 
         rightArm = new PenguinArm(name + ":rightArm");

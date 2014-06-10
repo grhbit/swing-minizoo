@@ -6,7 +6,6 @@ import java.awt.image.BufferedImage;
 import javax.swing.JComponent;
 
 import minizoo.c.Entity;
-import minizoo.i.Drawable;
 
 public class Canvas extends JComponent {
 
@@ -49,12 +48,8 @@ public class Canvas extends JComponent {
         g2.scale((double) getWidth() / App.ScreenWidth, (double) getHeight() / App.ScreenHeight);
 
 		for (Entity entity : Entity.list) {
-			if (entity instanceof Drawable) {
-				Drawable drawable = entity;
-
-                drawable.setTint(getGlobalTint());
-                drawable.draw(backBufferGraphic);
-			}
+            entity.setTint(getGlobalTint());
+            entity.draw(backBufferGraphic);
 		}
 
         backBufferGraphic.dispose();

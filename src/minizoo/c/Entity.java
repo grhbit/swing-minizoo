@@ -10,12 +10,14 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.PriorityQueue;
 
+import com.sun.istack.internal.NotNull;
 import minizoo.c.action.Action;
 import minizoo.c.core.Vector2d;
 import minizoo.i.Collider;
 import minizoo.i.Drawable;
 import minizoo.i.Task;
 
+@SuppressWarnings("UnusedDeclaration")
 public abstract class Entity implements Comparable<Entity>, Collider, Drawable, Task {
 
 	public Entity(String name) {
@@ -78,16 +80,16 @@ public abstract class Entity implements Comparable<Entity>, Collider, Drawable, 
 
 	protected void drawChildren(Graphics2D g2) {
 		for (Entity child : getChildren()) {
-			if (child!=null && child instanceof Drawable) {
-				Drawable drawable = child;
-				drawable.draw(g2);
+			if (child!=null) {
+				child.draw(g2);
 			}
 		}
 	}
 
-	@Override
-	public int compareTo(Entity entity) {
-		return this.zOrder <= entity.zOrder ? -1 : 1;
+    @Override
+    @SuppressWarnings("NullableProblems")
+	public int compareTo(@NotNull Entity entity) {
+        return this.zOrder <= entity.zOrder ? -1 : 1;
 	}
 
 	public void addChild(Entity entity) {
@@ -109,6 +111,7 @@ public abstract class Entity implements Comparable<Entity>, Collider, Drawable, 
 		return children;
 	}
 
+    @SuppressWarnings("UnusedDeclaration")
     public void setParent(Entity parent) {
         if (this.parent != null) {
             this.parent.removeChild(this);
@@ -163,7 +166,8 @@ public abstract class Entity implements Comparable<Entity>, Collider, Drawable, 
 		this.anchor = anchor;
 		isDirty = true;
 	}
-	public Vector2d getAnchor() {
+	@SuppressWarnings("UnusedDeclaration")
+    public Vector2d getAnchor() {
 		return anchor;
 	}
 
@@ -206,10 +210,10 @@ public abstract class Entity implements Comparable<Entity>, Collider, Drawable, 
         }
     }
 
-	public void setZOrder(int zOrder) {
+    public void setZOrder(int zOrder) {
 		this.zOrder = zOrder;
 	}
-	public int getZOrder() {
+    public int getZOrder() {
 		return zOrder;
 	}
 

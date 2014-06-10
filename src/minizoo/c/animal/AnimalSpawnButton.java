@@ -12,7 +12,6 @@ import minizoo.i.TouchListener;
 
 import java.awt.*;
 import java.awt.geom.Point2D;
-import java.awt.image.BufferedImage;
 
 public class AnimalSpawnButton extends Entity implements TouchListener {
     public AnimalSpawnButton(AnimalFactory factory) {
@@ -23,8 +22,6 @@ public class AnimalSpawnButton extends Entity implements TouchListener {
 
         this.addChild(factory.build());
     }
-
-    BufferedImage image;
 
     @Override
     public void beforeDraw(Graphics2D g2) {

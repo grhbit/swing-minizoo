@@ -1,5 +1,6 @@
 package minizoo.c.action;
 
+@SuppressWarnings("UnusedDeclaration")
 public class RandomDelay extends Finite {
 
     public static RandomDelay c(float min, float max) {

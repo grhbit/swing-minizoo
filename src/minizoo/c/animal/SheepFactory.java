@@ -7,7 +7,6 @@ import minizoo.i.AnimalFactory;
 public class SheepFactory implements AnimalFactory {
     @Override
     public Animal build() {
-        Animal result = new Sheep("Sheep");
-        return result;
+        return new Sheep("Sheep");
     }
 }

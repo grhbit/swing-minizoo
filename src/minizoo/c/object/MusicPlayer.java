@@ -17,7 +17,7 @@ public class MusicPlayer extends Entity implements TouchListener {
         sprRadio = new Sprite("resources/audio_file.png");
         this.addChild(sprRadio);
 
-        audio = new Audio("resources/bgm.wav");
+        audio = new Audio("resources/bgm.mp3");
         this.addChild(audio);
     }
 

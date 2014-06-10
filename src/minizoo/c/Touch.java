@@ -106,17 +106,17 @@ public class Touch implements MouseListener, MouseMotionListener {
 		if (isWaitDoubleClick) {
 			isWaitDoubleClick = false;
 			// Double Click
-			if (currHovered!=null && currHovered instanceof TouchListener) {
+			if (currHovered instanceof TouchListener) {
 				TouchListener touchListener;
 				touchListener = (TouchListener)currHovered;
 				touchListener.DoubleClick();
 			}
 
 		} else {
-            if (currHovered!=null && currHovered instanceof TouchListener) {
+            if (currHovered instanceof TouchListener) {
                 TouchListener touchListener;
                 touchListener = (TouchListener)currHovered;
-                if (touchListener.isNeededSupportingDoubleClicking() == false) {
+                if (!touchListener.isNeededSupportingDoubleClicking()) {
                     touchListener.Click();
                     return;
                 }

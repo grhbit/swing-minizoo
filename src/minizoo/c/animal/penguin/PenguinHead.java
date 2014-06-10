@@ -4,6 +4,7 @@ import minizoo.c.Entity;
 
 import java.awt.*;
 
+@SuppressWarnings("UnusedDeclaration")
 public class PenguinHead extends Entity {
     public PenguinHead(String name) {
         super(name);

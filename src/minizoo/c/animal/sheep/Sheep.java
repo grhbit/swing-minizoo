@@ -5,6 +5,7 @@ import minizoo.c.core.Vector2d;
 
 import java.awt.*;
 
+@SuppressWarnings("UnusedDeclaration")
 public class Sheep extends Animal {
     public final static Color brandColor = new Color(227, 227, 227); // fur color
     public final static Color subBrandColor = new Color(209, 204, 204); // fur sub-color

@@ -5,6 +5,7 @@ import minizoo.c.core.Vector2d;
 
 import java.awt.*;
 
+@SuppressWarnings("UnusedDeclaration")
 public class SheepEye extends Entity {
     public SheepEye(String name) {
         super(name);

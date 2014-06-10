@@ -2,6 +2,7 @@ package minizoo.c.core;
 
 import java.awt.geom.Point2D;
 
+@SuppressWarnings("UnusedDeclaration")
 public class Vector2d {
 	public Vector2d() {
 		x = 0.0;

@@ -8,12 +8,12 @@ public class PenguinArm extends Entity {
     public PenguinArm(String name) {
         super(name);
 
-        this.setContentSize(57, 303);
+        this.setContentSize(57, 243);
     }
 
     @Override
     public void visit(Graphics2D g2) {
         g2.setColor(getTintedColor(Penguin.brandColor));
-        g2.fillOval(0, 0, 57, 303);
+        g2.fillOval(0, 0, 57, 243);
     }
 }

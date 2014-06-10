@@ -23,11 +23,6 @@ public class App implements ActionListener {
 	public final static String Title = "Our Mini Zoo!";
 	public final static int ScreenWidth = 1280;
 	public final static int ScreenHeight = 720;
-	
-	public static Vector2d getActualSize() {
-		return new Vector2d(Instance().mainFrame.getWidth(),
-				Instance().mainFrame.getHeight());
-	}
 
 	public static App Instance() {
 		if (instance == null) {
@@ -112,7 +107,7 @@ public class App implements ActionListener {
 		mainCanvas.repaint();
 	}
 
-	void Update(float elapsed) {
+    void Update(@SuppressWarnings("UnusedParameters") float elapsed) {
 		if (mouse != null) {
 			mouse.Update();
 		}
