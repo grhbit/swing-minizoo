@@ -14,8 +14,6 @@ public class Canvas extends JComponent {
 	public Canvas() {
 		setOpaque(true);
 		setDoubleBuffered(true);
-
-		backBuffer = new BufferedImage(App.ScreenWidth, App.ScreenHeight, BufferedImage.TYPE_INT_RGB);
 	}
 
 	public void update(float elapsed) {
@@ -30,32 +28,21 @@ public class Canvas extends JComponent {
 
 		Graphics2D g2 = (Graphics2D)g;
 
-		Graphics backBufferGraphic = backBuffer.createGraphics();
-		Graphics2D backBufferGraphics2D = (Graphics2D)backBufferGraphic;
-
-        // Backbuffer clearing
-        backBufferGraphics2D.clearRect(0, 0, backBuffer.getWidth(), backBuffer.getHeight());
-
 		// Anti-aliasing
-		backBufferGraphics2D.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-		backBufferGraphics2D.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
+		g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+		g2.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
 
-        backBufferGraphics2D.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
-        backBufferGraphics2D.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BICUBIC);
-        backBufferGraphics2D.setRenderingHint(RenderingHints.KEY_COLOR_RENDERING, RenderingHints.VALUE_COLOR_RENDER_QUALITY);
+        g2.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_SPEED);
+        g2.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
+        g2.setRenderingHint(RenderingHints.KEY_COLOR_RENDERING, RenderingHints.VALUE_COLOR_RENDER_SPEED);
 
         // Stretch to design resolution.
         g2.scale((double) getWidth() / App.ScreenWidth, (double) getHeight() / App.ScreenHeight);
 
 		for (Entity entity : Entity.list) {
             entity.setTint(getGlobalTint());
-            entity.draw(backBufferGraphic);
+            entity.draw(g2);
 		}
-
-        backBufferGraphic.dispose();
-
-		// Present
-        g2.drawRenderedImage(backBuffer, null);
 	}
 
     public void setGlobalTint(Color globalTint) {
@@ -66,5 +53,4 @@ public class Canvas extends JComponent {
     }
 
     Color globalTint = new Color(0, 0, 0, 0);
-	BufferedImage backBuffer;
 }
