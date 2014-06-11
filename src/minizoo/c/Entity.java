@@ -26,7 +26,52 @@ public abstract class Entity implements Comparable<Entity>, Collider, Drawable, 
 		return "Entity:" + name + " " + getPosition();
 	}
 
-	@Override
+    @Override
+    public Rectangle2D getBoundingBox() {
+        Vector2d origPos = getPosition();
+        Vector2d origAnchor = getAnchor();
+
+        setPosition(0f, 0f);
+        setAnchor(0f, 0f);
+        Rectangle2D result = getBoundingBoxInternal(null);
+        setPosition(origPos);
+        setAnchor(origAnchor);
+
+        return result;
+    }
+
+    private Rectangle2D getBoundingBoxInternal(AffineTransform base) {
+        Vector2d min = new Vector2d();
+        Vector2d max = new Vector2d();
+
+        AffineTransform affineTransform;
+        if (base == null) {
+            affineTransform = getTransform();
+        } else {
+            affineTransform = (AffineTransform)base.clone();
+            affineTransform.concatenate(getTransform());
+        }
+
+        Rectangle2D boxCollider = new Rectangle2D.Double(0, 0, getContentSize().x, getContentSize().y);
+        boxCollider = affineTransform.createTransformedShape(boxCollider).getBounds2D();
+
+        min.x = boxCollider.getMinX();
+        min.y = boxCollider.getMinY();
+        max.x = boxCollider.getMaxX();
+        max.y = boxCollider.getMaxY();
+
+        for (Entity child : getChildren()) {
+            Rectangle2D childCollider = child.getBoundingBoxInternal(affineTransform);
+            min.x = Math.min(childCollider.getMinX(), min.x);
+            min.y = Math.min(childCollider.getMinY(), min.y);
+            max.x = Math.max(childCollider.getMaxX(), max.x);
+            max.y = Math.max(childCollider.getMaxY(), max.y);
+        }
+
+        return new Rectangle2D.Double(min.x, min.y, max.x - min.x, max.y - min.y);
+    }
+
+    @Override
 	public boolean intersect(Point2D point, AffineTransform base) {
 		AffineTransform affineTransform;
 
@@ -39,7 +84,7 @@ public abstract class Entity implements Comparable<Entity>, Collider, Drawable, 
 
 		Rectangle2D boxCollider = new Rectangle2D.Double(0, 0, getContentSize().x, getContentSize().y);
 		Shape transShaped = affineTransform.createTransformedShape(boxCollider);
-		
+
 		if (transShaped.contains(point)) {
 			return true;
 		} else {
@@ -65,7 +110,7 @@ public abstract class Entity implements Comparable<Entity>, Collider, Drawable, 
 		// Push Matrix
 		lastAffineTransform = g2.getTransform();
 		g2.transform(getTransform());
-	}
+    }
 
 	protected void visit(Graphics2D g2) {
 	}
@@ -73,7 +118,22 @@ public abstract class Entity implements Comparable<Entity>, Collider, Drawable, 
 	protected void afterDraw(Graphics2D g2) {
 		drawChildren(g2);
 
-		// Pop Matrix
+        // drawing bounding box
+        if (this instanceof Animal) {
+            Vector2d origScale = getScale();
+            setScale(1f, 1f);
+            g2.setTransform(lastAffineTransform);
+            g2.transform(getTransform());
+            setScale(origScale);
+
+            g2.setColor(Color.green);
+            g2.draw(getBoundingBox());
+
+            g2.setTransform(lastAffineTransform);
+            g2.transform(getTransform());
+        }
+
+        // Pop Matrix
 		g2.setTransform(lastAffineTransform);
 	}
 

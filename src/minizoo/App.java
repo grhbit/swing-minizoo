@@ -56,6 +56,7 @@ public class App implements ActionListener {
 		Entity.add(background, Integer.MIN_VALUE);
 
 		Animal animal = new Animal("Animal");
+        animal.setAnchor(0.5f, 0.5f);
         animal.setPosition(new Vector2d(400, 400));
 		animal.setContentSize(new Vector2d(100, 100));
 		Entity.add(animal, 2);
