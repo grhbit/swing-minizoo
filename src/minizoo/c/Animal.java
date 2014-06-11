@@ -4,9 +4,10 @@ import java.awt.*;
 import java.awt.geom.Point2D;
 
 import minizoo.e.State;
+import minizoo.i.DancingMachine;
 import minizoo.i.TouchListener;
 
-public class Animal extends Entity implements TouchListener {
+public class Animal extends Entity implements TouchListener, DancingMachine {
 
 	public Animal(String name) {
 		super(name);
@@ -68,4 +69,9 @@ public class Animal extends Entity implements TouchListener {
 
     State currState = State.Default;
     State prevState = null;
+
+    @Override
+    public void doDance(boolean begin) {
+
+    }
 }
