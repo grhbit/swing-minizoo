@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.PriorityQueue;
 
-import com.sun.istack.internal.NotNull;
 import minizoo.c.action.Action;
 import minizoo.c.core.Vector2d;
 import minizoo.i.Collider;
@@ -88,7 +87,7 @@ public abstract class Entity implements Comparable<Entity>, Collider, Drawable, 
 
     @Override
     @SuppressWarnings("NullableProblems")
-	public int compareTo(@NotNull Entity entity) {
+	public int compareTo(Entity entity) {
         return this.zOrder <= entity.zOrder ? -1 : 1;
 	}
 
