@@ -16,16 +16,13 @@ public class PandaMouse extends Entity {
     public void update(float elapsed) {
         super.update(elapsed);
     }
-    
+
 
     @Override
     public void visit(Graphics2D g2) {
-        g2.setColor(Panda.MouthColor);
+        g2.setColor(getTintedColor(Panda.MouthColor));
         g2.fillOval(0, 0, 50, 50);
-        g2.setColor(Panda.WhiteColor);
+        g2.setColor(getTintedColor(Panda.WhiteColor));
         g2.fillOval(0, -30, 50, 50);
-        
-        //g2.setColor(Panda.MouthColor);
-       // g2.fillRect(1, 21, 45, 27);
     }
 }

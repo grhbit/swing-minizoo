@@ -4,7 +4,6 @@ import minizoo.c.Entity;
 import minizoo.c.core.Vector2d;
 
 import java.awt.*;
-//import java.awt.geom.Ellipse2D;
 
 public class PandaEye extends Entity {
     public PandaEye(String name) {
@@ -25,15 +24,13 @@ public class PandaEye extends Entity {
 
     @Override
     public void visit(Graphics2D g2) {
-        g2.setColor(Panda.BlackColor);
-      //  g2.fillRect(0, 0, 60, 35);
+        g2.setColor(getTintedColor(Panda.BlackColor));
         g2.fillOval(0, 0, 120, 100);
-        g2.setColor(Panda.WhiteColor);
+        g2.setColor(getTintedColor(Panda.WhiteColor));
         g2.fillOval(10, 20, 80, 60);
-        
-        g2.setColor(Panda.BlackColor);
+
+        g2.setColor(getTintedColor(Panda.BlackColor));
         g2.fillOval(13, 30, 50, 50);
-        //
     }
 
     float blinkFactor = 0f;

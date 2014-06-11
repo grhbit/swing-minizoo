@@ -8,9 +8,7 @@ import javax.swing.JFrame;
 import javax.swing.Timer;
 
 import minizoo.c.Animal;
-import minizoo.c.animal.AnimalSpawnButton;
-import minizoo.c.animal.PenguinFactory;
-import minizoo.c.animal.SheepFactory;
+import minizoo.c.animal.*;
 import minizoo.c.background.Background;
 import minizoo.c.Entity;
 import minizoo.c.FPSTimer;
@@ -77,6 +75,14 @@ public class App implements ActionListener {
         AnimalSpawnButton penguinSpanwer = new AnimalSpawnButton(new PenguinFactory());
         penguinSpanwer.setPosition(new Vector2d(100, 400));
         Entity.add(penguinSpanwer, 0);
+
+        AnimalSpawnButton pandaSpanwer = new AnimalSpawnButton(new PandaFactory());
+        pandaSpanwer.setPosition(new Vector2d(100, 500));
+        Entity.add(pandaSpanwer, 0);
+
+        AnimalSpawnButton bearSpanwer = new AnimalSpawnButton(new BearFactory());
+        bearSpanwer.setPosition(new Vector2d(100, 600));
+        Entity.add(bearSpanwer, 0);
 
 		FPSTimer fpsTimer = new FPSTimer();
 		Entity.add(fpsTimer, Integer.MAX_VALUE);
