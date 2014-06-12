@@ -32,58 +32,12 @@ public class Bear extends Animal {
 		super(name);
 
 		this.setScale(new Vector2d(0.2f, 0.2f));
+        isLDir = false;
 
 		body = new BearBody(name + ":Body");
 		addChild(body);
 
-		// this.stopAllAction();
-		/*this.getBody().stopAllAction();
-		this.getBody().getLeftArm().stopAllAction();
-		this.getBody().getRightArm().stopAllAction();
-		this.getBody().getLeftLeg().stopAllAction();
-		this.getBody().getRightLeg().stopAllAction();
-		this.getBody().getHead().stopAllAction();
-		this.getBody().getSki().stopAllAction();
-
-		this.getBody()
-				.getRightArm()
-				.runAction(
-						new Forever(new Sequence(new Instant(new MoveBy(0.5f,
-								40f, 10f)), new EaseInOutSine(new MoveBy(0.5f,
-								-40f, -10f)))));
-		this.getBody()
-				.getLeftArm()
-				.runAction(
-						new Forever(new Sequence(new Instant(new MoveBy(0.13f,
-								30f, 0f)), new EaseInOutSine(new MoveBy(0.13f,
-								-30f, 0f)))));
-
-		this.getBody()
-				.getHead()
-				.runAction(
-						new Forever(new Sequence(new EaseLinear(new RotateBy(
-								0.5f, 1f)), new EaseLinear(new RotateBy(0.5f,
-								-1f)))));
-
-		this.getBody()
-				.getRightLeg()
-				.runAction(
-						new Forever(new Sequence(new EaseInOutSine(
-								new RotateBy(2f, 7f)))));
-
-		this.getBody()
-				.getLeftLeg()
-				.runAction(
-						new Forever(new Sequence(new EaseInOutSine(
-								new RotateBy(2f, 7f)))));
-
-		this.getBody()
-				.getSki()
-				.runAction(
-						new Forever(new Sequence(new EaseInSine(new MoveBy(2f,
-								-600f, 0f)), new Instant(new MoveBy(0.0000001f,
-								600f, 0f)))));*/
-
+        movingStart();
 	}
 
 	public void doDance(boolean begin) {
@@ -136,6 +90,8 @@ public class Bear extends Animal {
 									2f, -600f, 0f)), new Instant(new MoveBy(
 									0.0000001f, 600f, 0f)))));
 
+            movingStop();
+
 		} else {
 			this.stopAllAction();
 			this.getBody().getLeftArm().stopAllAction();
@@ -181,6 +137,8 @@ public class Bear extends Animal {
 							new Forever(new Sequence(new EaseInSine(new MoveBy(
 									2f, -400f, 0f)), new Instant(new MoveBy(
 									0.0000001f, 400f, 0f)))));
+
+            movingStart();
 		}
 	}
 

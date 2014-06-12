@@ -13,7 +13,9 @@ import minizoo.c.background.Background;
 import minizoo.c.animal.sheep.Sheep;
 import minizoo.c.background.Ground;
 import minizoo.c.core.Vector2d;
+import minizoo.c.object.AnimalClear;
 import minizoo.c.object.MusicPlayer;
+import minizoo.c.object.ToggleBG;
 
 public class App implements ActionListener {
 	public final static String Title = "Our Mini Zoo!";
@@ -21,6 +23,12 @@ public class App implements ActionListener {
 	public final static int ScreenHeight = 720;
 
     public static boolean isDancingTime = false;
+
+    Background background = null;
+
+    public void toggleBackground() {
+        background.toggleBG();
+    }
 
 	public static App Instance() {
 		if (instance == null) {
@@ -52,7 +60,7 @@ public class App implements ActionListener {
 		mainCanvas.addMouseListener(mouse);
 		mainCanvas.addMouseMotionListener(mouse);
 
-		Background background = new Background("Background");
+		background = new Background("Background");
 		Entity.add(background, Integer.MIN_VALUE);
 
         Ground ground = new Ground("ground");
@@ -63,8 +71,16 @@ public class App implements ActionListener {
         Entity.add(sheep);
 
         MusicPlayer musicPlayer = new MusicPlayer("");
-        musicPlayer.setPosition(new Vector2d(ScreenWidth-100, ScreenHeight-100));
+        musicPlayer.setPosition(new Vector2d(ScreenWidth-100, 100));
         Entity.add(musicPlayer);
+
+        ToggleBG toggleBG = new ToggleBG("");
+        toggleBG.setPosition(ScreenWidth-100, 200);
+        Entity.add(toggleBG);
+
+        AnimalClear animalClear = new AnimalClear("");
+        animalClear.setPosition(ScreenWidth-100, 300);
+        Entity.add(animalClear);
 
         AnimalSpawnButton sheepSpawner = new AnimalSpawnButton(new SheepFactory());
         sheepSpawner.setPosition(new Vector2d(100, 100));

@@ -43,9 +43,15 @@ public class Background extends Entity {
         moon = new Moon(name + ":Moon");
         moon.setPosition(new Vector2d(640, App.ScreenHeight + 640));
         this.addChild(moon);
-
-        this.runAction(Forever.c(Sequence.c(EaseInSine.c(RotateTo.c(0.8f, (float) -Math.PI)), Delay.c(3f))));
 	}
+
+    public void toggleBG () {
+        this.stopAction("toggleBG");
+        this.setRotation(d? 0f: (float)Math.PI);
+        this.runAction(EaseInSine.c(RotateTo.c(0.8f, (float) -Math.PI)), "toggleBG");
+        d = !d;
+    }
+    boolean d = true;
 
     @Override
     public void visit(Graphics2D g2) {

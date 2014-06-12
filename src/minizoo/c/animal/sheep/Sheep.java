@@ -1,6 +1,5 @@
 package minizoo.c.animal.sheep;
 
-import minizoo.App;
 import minizoo.c.Animal;
 import minizoo.c.action.*;
 import minizoo.c.action.easing.EaseInOutSine;
@@ -53,7 +52,6 @@ public class Sheep extends Animal {
 
     @Override
     public void Press(boolean isPress, Point2D pos) {
-
         if (isPress) {
             normalAction(false);
             dancingAction(false);
@@ -63,11 +61,14 @@ public class Sheep extends Animal {
             dancingAction(false);
             normalAction(true);
         }
+
+        super.Press(isPress, pos);
     }
 
     void allActionStop() {
         this.stopAllAction();
         this.setScale(0.3f, 0.3f);
+        movingStop();
         getBody().reset();
         getBody().stopAllAction();
         getBody().getBackLeftLeg().stopAllAction();
@@ -104,16 +105,7 @@ public class Sheep extends Animal {
                     Delay.c(0.3f), EaseOutSine.c(MoveBy.c(0.3f, -stepWidth, 0)), EaseOutSine.c(MoveBy.c(0.3f, stepWidth, 0)), Delay.c(0.3f)
             )));
 
-            int maxCount = (int)(App.ScreenWidth/stepWidth);
-            this.runAction(
-                    Forever.c(
-                            Sequence.c(
-                                Repeat.c((int)(getPosition().x/stepWidth), EaseOutSine.c(MoveBy.c(1.2f, -stepWidth, 0))),
-                                ScaleTo.c(0f, -0.3f, 0.3f),
-                                Repeat.c(maxCount, EaseOutSine.c(MoveBy.c(1.2f, stepWidth, 0))),
-                                ScaleTo.c(0f, 0.3f, 0.3f),
-                                Repeat.c(maxCount-(int)(getPosition().x/stepWidth), EaseOutSine.c(MoveBy.c(1.2f, -stepWidth, 0))))));
-
+            movingStart();
         } else if (!isStart) {
             allActionStop();
         }
@@ -160,7 +152,6 @@ public class Sheep extends Animal {
             allActionStop();
         }
     }
-
 
     public SheepBody getBody() {
         return body;

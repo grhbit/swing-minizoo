@@ -2,21 +2,37 @@ package minizoo.c;
 
 import java.awt.*;
 import java.awt.geom.Point2D;
+import java.util.Random;
 
 import minizoo.App;
+import minizoo.c.core.Vector2d;
 import minizoo.e.State;
 import minizoo.i.DancingMachine;
 import minizoo.i.TouchListener;
 
 public class Animal extends Entity implements TouchListener, DancingMachine {
 
+    public boolean isLDir = true;
 	public Animal(String name) {
-		super(name);
+        super(name);
+        ent = (new Random()).nextFloat();
 	}
+    float ent = 0f;
 
 	@Override
 	public void update(float elapsed) {
         super.update(elapsed);
+        float targetX = ((float)Math.sin(getUpdatedTime()/3f - ent) + 1) * App.ScreenWidth * 0.5f;
+        Vector2d pos = getPosition();
+
+        if (pos.x < targetX) {
+            setScale((float)Math.abs(getScale().x) * (isLDir? -1f:1f), (float)getScale().y);
+        } else if (pos.x > targetX) {
+            setScale((float)Math.abs(getScale().x) * (isLDir? 1f:-1f), (float)getScale().y);
+        }
+        pos.x = (targetX-pos.x)*elapsed + pos.x;
+
+        setPosition(pos);
 	}
 
 	@Override
@@ -39,12 +55,44 @@ public class Animal extends Entity implements TouchListener, DancingMachine {
 	}
 
 	double sx, sy;
+    boolean isMoving = false;
+
+    public void movingStop() {
+        isMoving = false;
+        // stopAction("moving");
+    }
+
+    public void movingStart() {
+        isMoving = true;
+        /*
+        float stepWidth = 30f;
+        int maxCount = (int)((App.ScreenWidth)/stepWidth);
+        this.runAction(
+                Forever.c(
+                        Sequence.c(
+                                Repeat.c((int) (getPosition().x / stepWidth), EaseLinear.c(MoveBy.c(1.2f, -stepWidth, 0))),
+                                ScaleTo.c(0f, -(float)getScale().x, (float)getScale().y),
+                                Repeat.c(maxCount, EaseLinear.c(MoveBy.c(1.2f, stepWidth, 0))),
+                                ScaleTo.c(0f, (float)getScale().x, (float)getScale().y),
+                                Repeat.c(maxCount - (int) (getPosition().x / stepWidth), EaseLinear.c(MoveBy.c(1.2f, -stepWidth, 0))))), "moving");
+                                */
+    }
 
 	@Override
 	public void Press(boolean isPress, Point2D point) {
 		System.out.println("Press " + isPress + " " + point);
 		sx = point.getX() - position.x;
 		sy = point.getY() - position.y;
+
+        if (isPress) {
+            movingStop();
+        } else {
+            if (App.isDancingTime) {
+                doDance(true);
+            } else {
+                movingStart();
+            }
+        }
 	}
 
 	@Override
