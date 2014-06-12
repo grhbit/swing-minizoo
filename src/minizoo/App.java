@@ -66,24 +66,32 @@ public class App implements ActionListener {
         Entity.add(sheep);
 
         MusicPlayer musicPlayer = new MusicPlayer("");
-        musicPlayer.setPosition(new Vector2d(100, 500));
+        musicPlayer.setPosition(new Vector2d(ScreenWidth-100, ScreenHeight-100));
         Entity.add(musicPlayer);
 
         AnimalSpawnButton sheepSpawner = new AnimalSpawnButton(new SheepFactory());
-        sheepSpawner.setPosition(new Vector2d(100, 300));
+        sheepSpawner.setPosition(new Vector2d(100, 150));
         Entity.add(sheepSpawner, 0);
 
         AnimalSpawnButton penguinSpanwer = new AnimalSpawnButton(new PenguinFactory());
-        penguinSpanwer.setPosition(new Vector2d(100, 400));
+        penguinSpanwer.setPosition(new Vector2d(100, 250));
         Entity.add(penguinSpanwer, 0);
 
         AnimalSpawnButton pandaSpanwer = new AnimalSpawnButton(new PandaFactory());
-        pandaSpanwer.setPosition(new Vector2d(100, 500));
+        pandaSpanwer.setPosition(new Vector2d(100, 350));
         Entity.add(pandaSpanwer, 0);
 
         AnimalSpawnButton bearSpanwer = new AnimalSpawnButton(new BearFactory());
-        bearSpanwer.setPosition(new Vector2d(100, 600));
+        bearSpanwer.setPosition(new Vector2d(100, 450));
         Entity.add(bearSpanwer, 0);
+
+        AnimalSpawnButton duckSpanwer = new AnimalSpawnButton(new DuckFactory());
+        duckSpanwer.setPosition(new Vector2d(100, 550));
+        Entity.add(duckSpanwer, 0);
+
+        AnimalSpawnButton lionSpanwer = new AnimalSpawnButton(new LionFactory());
+        lionSpanwer.setPosition(new Vector2d(100, 650));
+        Entity.add(lionSpanwer, 0);
 
 		FPSTimer fpsTimer = new FPSTimer();
 		Entity.add(fpsTimer, Integer.MAX_VALUE);
