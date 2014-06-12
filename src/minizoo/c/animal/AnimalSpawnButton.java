@@ -24,6 +24,12 @@ public class AnimalSpawnButton extends Entity implements TouchListener {
     }
 
     @Override
+    public void update(float elapsed) {
+        super.update(elapsed);
+        ((Entity)(getChildren().toArray()[0])).setPosition(0, 0);
+    }
+
+    @Override
     public void beforeDraw(Graphics2D g2) {
         super.beforeDraw(g2);
     }

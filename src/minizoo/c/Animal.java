@@ -67,11 +67,9 @@ public class Animal extends Entity implements TouchListener, DancingMachine {
 		g2.fillRect(0, 0, (int)getContentSize().x, (int)getContentSize().y);
 	}
 
-    State currState = State.Default;
-    State prevState = null;
+    protected State currState = State.Default;
+    protected State prevState = State.Default;
 
     @Override
-    public void doDance(boolean begin) {
-
-    }
+    public void doDance(boolean begin) { }
 }

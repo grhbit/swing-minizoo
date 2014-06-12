@@ -54,6 +54,20 @@ public class SheepBody extends Entity {
         addChild(head, 1);
     }
 
+    public void reset() {
+        frontLeftLeg.setPosition(new Vector2d(82, 293));
+        frontLeftLeg.setNearLeg(true);
+        frontRightLeg.setPosition(new Vector2d(157, 293));
+        frontRightLeg.setNearLeg(false);
+        backLeftLeg.setPosition(new Vector2d(312, 293));
+        backLeftLeg.setNearLeg(true);
+        backRightLeg.setPosition(new Vector2d(392, 293));
+        backRightLeg.setNearLeg(false);
+
+        bodyInternel.setPosition(0, 0);
+        head.setPosition(0, 0);
+    }
+
     @Override
     public void update(float elapsed) {
         super.update(elapsed);

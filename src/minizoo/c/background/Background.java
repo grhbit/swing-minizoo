@@ -40,6 +40,10 @@ public class Background extends Entity {
         sun.setPosition(new Vector2d(1136, 108));
         this.addChild(sun, 0);
 
+        moon = new Moon(name + ":Moon");
+        moon.setPosition(new Vector2d(640, App.ScreenHeight + 640));
+        this.addChild(moon);
+
         this.runAction(Forever.c(Sequence.c(EaseInSine.c(RotateTo.c(0.8f, (float) -Math.PI)), Delay.c(3f))));
 	}
 
@@ -56,4 +60,5 @@ public class Background extends Entity {
 
     Sprite sprBackground;
     Sun sun;
+    Moon moon;
 }
