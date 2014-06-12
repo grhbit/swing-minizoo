@@ -36,17 +36,23 @@ public class Background extends Entity {
         this.setAnchor(new Vector2d(0.5, 1));
         this.setContentSize(new Vector2d(App.ScreenWidth, App.ScreenHeight));
 
-        sprBackground = new Sprite("resources/background.png");
-        sprBackground.setPosition(new Vector2d(App.ScreenWidth / 2f, App.ScreenHeight));
-        sprBackground.setScale(new Vector2d(5, 5));
-        this.addChild(sprBackground, -1);
-
         sun = new Sun(name + ":Sun");
         sun.setPosition(new Vector2d(1136, 108));
         this.addChild(sun, 0);
 
         this.runAction(Forever.c(Sequence.c(EaseInSine.c(RotateTo.c(0.8f, (float) -Math.PI)), Delay.c(3f))));
 	}
+
+    @Override
+    public void visit(Graphics2D g2) {
+        Color dayColor = new Color(208, 244, 247);
+        g2.setColor(dayColor);
+        g2.fillRect(-240, 0, App.ScreenWidth * 2 + 240, App.ScreenHeight);
+
+        Color nightColor = new Color(94, 63, 107);
+        g2.setColor(nightColor);
+        g2.fillRect(-240, App.ScreenHeight, App.ScreenWidth * 2 + 240, App.ScreenHeight);
+    }
 
     Sprite sprBackground;
     Sun sun;

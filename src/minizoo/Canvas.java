@@ -1,11 +1,12 @@
 package minizoo;
 
 import java.awt.*;
-import java.awt.image.BufferedImage;
 
 import javax.swing.JComponent;
 
+import minizoo.c.Animal;
 import minizoo.c.Entity;
+import minizoo.c.core.Vector2d;
 
 public class Canvas extends JComponent {
 
@@ -19,6 +20,19 @@ public class Canvas extends JComponent {
 	public void update(float elapsed) {
 		for (Entity entity : Entity.list) {
 			entity.update(elapsed);
+
+            if (entity instanceof Animal && (entity != App.Instance().getTouch().getCurrentDrag())) {
+                Vector2d pos = entity.getPosition();
+
+                float groundY = App.ScreenHeight - (float)entity.getBoundingBox().getMinY() - 200f;
+                if (pos.y < groundY) {
+                    pos.y += (groundY - pos.y) * elapsed;
+                } else {
+                    pos.y -= 10f * elapsed;
+                }
+
+                entity.setPosition(pos);
+            }
 		}
 	}
 

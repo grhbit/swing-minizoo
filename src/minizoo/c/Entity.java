@@ -119,6 +119,7 @@ public abstract class Entity implements Comparable<Entity>, Collider, Drawable, 
 		drawChildren(g2);
 
         // drawing bounding box
+        /*
         if (this instanceof Animal) {
             Vector2d origScale = getScale();
             setScale(1f, 1f);
@@ -132,6 +133,7 @@ public abstract class Entity implements Comparable<Entity>, Collider, Drawable, 
             g2.setTransform(lastAffineTransform);
             g2.transform(getTransform());
         }
+        */
 
         // Pop Matrix
 		g2.setTransform(lastAffineTransform);

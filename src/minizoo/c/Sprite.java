@@ -1,12 +1,14 @@
 package minizoo.c;
 
 import minizoo.c.core.Vector2d;
+import minizoo.c.filter.ColorTintFilter;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.nio.Buffer;
 
 public class Sprite extends Entity {
     public Sprite(String filename) {
@@ -36,7 +38,9 @@ public class Sprite extends Entity {
     @Override
     public void visit(Graphics2D g2) {
         if (image != null) {
-            g2.drawRenderedImage(image, null);
+            ColorTintFilter tint = new ColorTintFilter(getTintedColor(Color.white));
+            BufferedImage dst = tint.createCompatibleDestImage(image, null);
+            g2.drawRenderedImage(tint.filter(image, dst), null);
         }
     }
 
