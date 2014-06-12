@@ -15,7 +15,6 @@ public class PandaLeftArm extends Entity {
         super(name);
 
         this.setContentSize(new Vector2d(112, 62));
-
         this.runAction(
                 new Forever(
                         new Sequence(
