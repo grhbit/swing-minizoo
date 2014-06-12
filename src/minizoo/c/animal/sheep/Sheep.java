@@ -1,5 +1,6 @@
 package minizoo.c.animal.sheep;
 
+import minizoo.App;
 import minizoo.c.Animal;
 import minizoo.c.action.*;
 import minizoo.c.action.easing.EaseInOutSine;
@@ -66,6 +67,7 @@ public class Sheep extends Animal {
 
     void allActionStop() {
         this.stopAllAction();
+        this.setScale(0.3f, 0.3f);
         getBody().reset();
         getBody().stopAllAction();
         getBody().getBackLeftLeg().stopAllAction();
@@ -73,6 +75,7 @@ public class Sheep extends Animal {
         getBody().getFrontLeftLeg().stopAllAction();
         getBody().getFrontRightLeg().stopAllAction();
         getBody().getBodyInternel().stopAllAction();
+        getBody().getHead().setRotation(0);
         getBody().getHead().stopAllAction();
         getBody().getHead().getLeftEye().stopAllAction();
         getBody().getHead().getRightEye().stopAllAction();
@@ -101,7 +104,15 @@ public class Sheep extends Animal {
                     Delay.c(0.3f), EaseOutSine.c(MoveBy.c(0.3f, -stepWidth, 0)), EaseOutSine.c(MoveBy.c(0.3f, stepWidth, 0)), Delay.c(0.3f)
             )));
 
-            this.runAction(Forever.c(Sequence.c(Delay.c(0f), EaseInOutSine.c(MoveBy.c(1.2f - 0f, -stepWidth, 0)))));
+            int maxCount = (int)(App.ScreenWidth/stepWidth);
+            this.runAction(
+                    Forever.c(
+                            Sequence.c(
+                                Repeat.c((int)(getPosition().x/stepWidth), EaseOutSine.c(MoveBy.c(1.2f, -stepWidth, 0))),
+                                ScaleTo.c(0f, -0.3f, 0.3f),
+                                Repeat.c(maxCount, EaseOutSine.c(MoveBy.c(1.2f, stepWidth, 0))),
+                                ScaleTo.c(0f, 0.3f, 0.3f),
+                                Repeat.c(maxCount-(int)(getPosition().x/stepWidth), EaseOutSine.c(MoveBy.c(1.2f, -stepWidth, 0))))));
 
         } else if (!isStart) {
             allActionStop();
@@ -113,17 +124,6 @@ public class Sheep extends Animal {
         currState = State.Dancing;
 
         if (prevState != State.Dancing) {
-            allActionStop();
-        } else if (!isStart) {
-            allActionStop();
-        }
-    }
-
-    public void pickingAction(boolean isStart) {
-        prevState = currState;
-        currState = State.Picking;
-
-        if (prevState != State.Picking) {
             allActionStop();
 
             float stepWidth = 30f;
@@ -147,6 +147,17 @@ public class Sheep extends Animal {
         } else if (!isStart) {
             allActionStop();
             getBody().getHead().setRotation(0);
+        }
+    }
+
+    public void pickingAction(boolean isStart) {
+        prevState = currState;
+        currState = State.Picking;
+
+        if (prevState != State.Picking) {
+            allActionStop();
+        } else if (!isStart) {
+            allActionStop();
         }
     }
 

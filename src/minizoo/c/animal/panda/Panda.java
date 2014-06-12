@@ -38,7 +38,7 @@ public class Panda extends Animal {
 		super(name);
 
 		
-		this.setScale(new Vector2d(0.24f, 0.24f));
+		this.setScale(new Vector2d(0.2f, 0.2f));
 
 		body = new PandaBody(name + ":Body");
 		addChild(body);

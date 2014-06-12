@@ -3,6 +3,7 @@ package minizoo.c;
 import java.awt.*;
 import java.awt.geom.Point2D;
 
+import minizoo.App;
 import minizoo.e.State;
 import minizoo.i.DancingMachine;
 import minizoo.i.TouchListener;
@@ -15,7 +16,7 @@ public class Animal extends Entity implements TouchListener, DancingMachine {
 
 	@Override
 	public void update(float elapsed) {
-		super.update(elapsed);
+        super.update(elapsed);
 	}
 
 	@Override

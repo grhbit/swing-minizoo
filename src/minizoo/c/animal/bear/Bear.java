@@ -31,7 +31,7 @@ public class Bear extends Animal {
 	public Bear(String name) {
 		super(name);
 
-		this.setScale(new Vector2d(0.24f, 0.24f));
+		this.setScale(new Vector2d(0.2f, 0.2f));
 
 		body = new BearBody(name + ":Body");
 		addChild(body);

@@ -20,6 +20,8 @@ public class App implements ActionListener {
 	public final static int ScreenWidth = 1280;
 	public final static int ScreenHeight = 720;
 
+    public static boolean isDancingTime = false;
+
 	public static App Instance() {
 		if (instance == null) {
 			instance = new App();
@@ -36,7 +38,7 @@ public class App implements ActionListener {
 
 		mainFrame = new JFrame();
 		mainFrame.setTitle(App.Title);
-		mainFrame.setSize(App.ScreenWidth, App.ScreenHeight);
+		mainFrame.setSize(App.ScreenWidth/2, App.ScreenHeight/2);
 		mainFrame.setLayout(new BorderLayout());
 		mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
