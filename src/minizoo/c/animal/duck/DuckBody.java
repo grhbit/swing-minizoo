@@ -17,6 +17,7 @@ public class DuckBody extends Entity
 	private DuckLegs farleg;
 	private DuckNeck neck;
 	private DuckWings frontwing;
+	private DuckWings backwing;
 	
 	public class DuckBodyInternal extends Entity
 	{
@@ -51,25 +52,29 @@ public class DuckBody extends Entity
 		this.setContentSize(new Vector2d(600,240));
         
 		farleg = new DuckLegs(name + ":backLeg");
-	    farleg.setPosition(new Vector2d(200, 230));
+	    farleg.setPosition(new Vector2d(200, 180));
 	    farleg.setNearLeg(false);
-	    addChild(farleg,1);
+	    addChild(farleg,0);
 	        
 	    nearleg = new DuckLegs(name + ":frontLeg");
-	    nearleg.setPosition(new Vector2d(170, 246));
+	    nearleg.setPosition(new Vector2d(170, 196));
 	    nearleg.setNearLeg(true);
 	    addChild(nearleg,2);
 	    
+		backwing = new DuckWings(name + ":backWing");
+        backwing.setPosition(new Vector2d(160, 10));
+        addChild(backwing,5);
+	    
 		bodyinternal = new DuckBodyInternal(name + ":bodyInternal");
-        addChild(bodyinternal,3);
+        addChild(bodyinternal,7);
 
         frontwing = new DuckWings(name + ":frontWing");
         frontwing.setPosition(new Vector2d(160, 10));
-        addChild(frontwing,5);
+        addChild(frontwing,9);
         
         neck = new DuckNeck(name + ":Neck");
         neck.setPosition(new Vector2d(165, 90));
-        addChild(neck);
+        addChild(neck,3);
 	}
 	
 	public DuckLegs getFarleg()
@@ -87,6 +92,10 @@ public class DuckBody extends Entity
 	public DuckWings getFrontwing()
 	{
 		return frontwing;
+	}
+	public DuckWings getBackwing()
+	{
+		return backwing;
 	}
 	public DuckNeck getNeck()
 	{
@@ -108,8 +117,21 @@ public class DuckBody extends Entity
 	{
 		this.frontwing = frontwing;
 	}
+	public void getBackwing(DuckWings backwing)
+	{
+		this.backwing = backwing;
+	}
 	public void setNeck(DuckNeck neck)
 	{
 		this.neck = neck;
+	}
+	public void reset()
+	{
+		this.setPosition(new Vector2d(0,0));
+		this.getFrontwing().setRotation(0);
+		this.getBackwing().setRotation(0);
+		this.getNeck().setRotation(0);
+		this.getFarleg().setRotation(0);
+		this.getNearleg().setRotation(0);
 	}
 }

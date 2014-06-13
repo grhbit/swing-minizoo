@@ -5,6 +5,10 @@ import java.awt.geom.Point2D;
 import java.util.Random;
 
 import minizoo.App;
+import minizoo.c.animal.duck.Duck;
+import minizoo.c.animal.lion.Lion;
+import minizoo.c.animal.penguin.Penguin;
+import minizoo.c.animal.sheep.Sheep;
 import minizoo.c.core.Vector2d;
 import minizoo.e.State;
 import minizoo.i.DancingMachine;
@@ -22,8 +26,23 @@ public class Animal extends Entity implements TouchListener, DancingMachine {
 	@Override
 	public void update(float elapsed) {
         super.update(elapsed);
+
         float targetX = ((float)Math.sin(getUpdatedTime()/3f - ent) + 1) * App.ScreenWidth * 0.5f;
         Vector2d pos = getPosition();
+        if (this instanceof Lion || this instanceof Duck) {
+            if (pos.x < 0) {
+                setPosition(App.ScreenWidth, (float)getPosition().y);
+            }
+
+            return;
+        } else if (currState == State.Picking) {
+            ent = (new Random()).nextFloat() * 10f;
+            return;
+        }
+
+        if (this instanceof Sheep) {
+            targetX = ((float)Math.sin(getUpdatedTime()/30f - ent) + 1) * App.ScreenWidth * 0.5f;
+        }
 
         if (pos.x < targetX) {
             setScale((float)Math.abs(getScale().x) * (isLDir? -1f:1f), (float)getScale().y);
@@ -112,8 +131,8 @@ public class Animal extends Entity implements TouchListener, DancingMachine {
     @Override
 	public void visit(Graphics2D g2) {
 		super.visit(g2);
-		g2.setColor(getTintedColor(Color.white));
-		g2.fillRect(0, 0, (int)getContentSize().x, (int)getContentSize().y);
+//		g2.setColor(getTintedColor(Color.white));
+//		g2.fillRect(0, 0, (int)getContentSize().x, (int)getContentSize().y);
 	}
 
     protected State currState = State.Default;

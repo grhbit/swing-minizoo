@@ -22,16 +22,16 @@ public class DuckLegs extends Entity
 		if(isNear)
 		{
 			g2.setColor(getTintedColor(Duck.FRONTLEGCOLOR));
-			g2.fillRect(60,0,20,110);
-			g2.fillRect(-10, 90, 120, 40);
-			g2.fill(new Ellipse2D.Double(-30,90,50,40));
+			g2.fillRect(60,0,20,160);
+			g2.fillRect(-10, 140, 120, 40);
+			g2.fill(new Ellipse2D.Double(-30,140,50,40));
 		}
 		else
 		{
 			g2.setColor(getTintedColor(Duck.BACKLEGCOLOR));
-			g2.fillRect(60, 0, 20, 70);
-			g2.fillRect(-10, 50, 120, 40);
-			g2.fill(new Ellipse2D.Double(-30,50,50,40));
+			g2.fillRect(60, 0, 20, 120);
+			g2.fillRect(-10, 100, 120, 40);
+			g2.fill(new Ellipse2D.Double(-30,100,50,40));
 		}
 	}
 	public boolean getIsNear()

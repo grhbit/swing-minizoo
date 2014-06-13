@@ -21,6 +21,7 @@ public class DuckNeck extends Entity
         head.setPosition(new Vector2d(-195+100, -300+100));
         addChild(head);
 		
+        
         this.runAction
         (
         	new Forever
@@ -38,6 +39,7 @@ public class DuckNeck extends Entity
         		)
         	)
         );
+        
 	}
 
 	public void visit(Graphics2D g2)

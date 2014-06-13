@@ -31,7 +31,8 @@ public class Bear extends Animal {
 	public Bear(String name) {
 		super(name);
 
-		this.setScale(new Vector2d(0.2f, 0.2f));
+		this.setScale(new Vector2d(0.20f, 0.20f));
+        this.setContentSize(300, 300);
         isLDir = false;
 
 		body = new BearBody(name + ":Body");
@@ -43,14 +44,7 @@ public class Bear extends Animal {
 	public void doDance(boolean begin) {
 
 		if (begin) {
-			this.stopAllAction();
-			this.getBody().getLeftArm().stopAllAction();
-			this.getBody().getRightArm().stopAllAction();
-			this.getBody().getLeftLeg().stopAllAction();
-			this.getBody().getRightLeg().stopAllAction();
-			this.getBody().getHead().stopAllAction();
-			this.getBody().getSki().stopAllAction();
-
+            this.stopAllAction();
 			this.getBody()
 					.getRightArm()
 					.runAction(
@@ -87,11 +81,9 @@ public class Bear extends Animal {
 					.getSki()
 					.runAction(
 							new Forever(new Sequence(new EaseInSine(new MoveBy(
-									2f, -600f, 0f)), new Instant(new MoveBy(
-									0.0000001f, 600f, 0f)))));
-
+									2f, -200f, 0f)), new Instant(new MoveBy(
+									0.0000001f, 200f, 0f)))));
             movingStop();
-
 		} else {
 			this.stopAllAction();
 			this.getBody().getLeftArm().stopAllAction();
@@ -137,9 +129,8 @@ public class Bear extends Animal {
 							new Forever(new Sequence(new EaseInSine(new MoveBy(
 									2f, -400f, 0f)), new Instant(new MoveBy(
 									0.0000001f, 400f, 0f)))));
-
             movingStart();
-		}
+        }
 	}
 
 	public BearBody getBody() {

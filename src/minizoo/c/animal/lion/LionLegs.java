@@ -29,6 +29,6 @@ public class LionLegs extends Entity
 		else
 			g2.setColor(getTintedColor(Lion.BACKLEGCOLOR));
 		
-		g2.fillRoundRect(0,0,100,180,20,30);
+		g2.fillRoundRect(0,10,100,170,20,30);
 	}
 }

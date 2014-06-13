@@ -37,52 +37,25 @@ public class Panda extends Animal {
 	public Panda(String name) {
 		super(name);
 
-		
-		this.setScale(new Vector2d(0.2f, 0.2f));
+
+        this.setScale(new Vector2d(0.2f, 0.2f));
 
 		body = new PandaBody(name + ":Body");
 		addChild(body);
-
-		//this.stopAllAction();
-		/*this.getBody().stopAllAction();
-		this.getBody().getLeftArm().stopAllAction();
-		this.getBody().getRightArm().stopAllAction();
-		this.getBody().getLeftLeg().stopAllAction();
-		this.getBody().getRightLeg().stopAllAction();
-		this.getBody().getHead().stopAllAction();
-		//this.getBody().getHead().stopAllAction();
-		
-		this.getBody().runAction(
-				new Forever(new Sequence(
-						new EaseLinear(new RotateBy(0.5f, 1f)), new EaseLinear(
-								new RotateBy(0.5f, -1f)))));
-
-		this.getBody()
-				.getRightArm()
-				.runAction(
-						new Forever(new Sequence(new Instant(new MoveBy(0.5f,
-								40f, 10f)), new EaseInOutSine(new MoveBy(0.5f,
-								-40f, -10f)))));
-		this.getBody()
-				.getLeftArm()
-				.runAction(
-						new Forever(new Sequence(new Instant(new MoveBy(0.13f,
-								30f, 0f)), new EaseInOutSine(new MoveBy(0.13f,
-								-30f, 0f)))));*/
 
 	}
 
 	public void doDance(boolean begin) {
 
 		if (begin) {
-			this.stopAllAction();
+			/*this.stopAllAction();
 			this.getBody().stopAllAction();
 			this.getBody().getLeftArm().stopAllAction();
 			this.getBody().getRightArm().stopAllAction();
 			this.getBody().getLeftLeg().stopAllAction();
 			this.getBody().getRightLeg().stopAllAction();
-			this.getBody().getHead().stopAllAction();
-			
+			this.getBody().getHead().stopAllAction(); //Do not Use StopAllaction at doing dance
+			*/
 			this.getBody().runAction(
 					new Forever(new Sequence(new EaseLinear(new RotateBy(0.5f,
 							1f)), new EaseLinear(new RotateBy(0.5f, -1f)))));

@@ -24,6 +24,22 @@ public class PenguinBody extends Entity {
         }
     }
 
+    public void reset() {
+        leftLeg.setAnchor(49f/73f, 14f/66f);
+        leftLeg.setPosition(129, 239);
+        leftLeg.setRotation(0);
+        rightLeg.setAnchor(49f/73f, 14f/66f);
+        rightLeg.setPosition(43, 239);
+        rightLeg.setRotation(0);
+        rightArm.setAnchor(0.5f, 10f/303f);
+        rightArm.setPosition(13, 25);
+        rightArm.setRotation(0);
+        head.setPosition(51, -19);
+        leftArm.setAnchor(0.5f, 10f/303f);
+        leftArm.setPosition(157, 29);
+        leftArm.setRotation(0);
+    }
+
     public PenguinBody(String name) {
         super(name);
 

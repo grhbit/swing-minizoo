@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class-diagram version="1.1.6" icons="true" automaticImage="PNG" always-add-relationships="true" generalizations="true" 
+  realizations="true" associations="true" dependencies="true" nesting-relationships="true">  
+  <class id="1" language="java" name="minizoo.c.animal.panda.Panda" project="OurMiniZoo" 
+    file="/OurMiniZoo/src/minizoo/c/animal/panda/Panda.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="87" y="451"/>    
+    <display autosize="true" stereotype="false" package="false" initial-value="true" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="false" protected="false" private="false" static="false"/>      
+      <operations public="true" package="false" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="2" language="java" name="minizoo.c.Animal" project="OurMiniZoo" 
+    file="/OurMiniZoo/src/minizoo/c/Animal.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="346" y="252"/>    
+    <display autosize="true" stereotype="false" package="false" initial-value="true" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="false" protected="false" private="false" static="false"/>      
+      <operations public="true" package="false" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="3" language="java" name="minizoo.i.DancingMachine" project="OurMiniZoo" 
+    file="/OurMiniZoo/src/minizoo/i/DancingMachine.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="80" y="108"/>    
+    <display autosize="true" stereotype="false" package="false" initial-value="true" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="false" protected="false" private="false" static="false"/>      
+      <operations public="true" package="false" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="4" language="java" name="minizoo.c.animal.duck.Duck" project="OurMiniZoo" 
+    file="/OurMiniZoo/src/minizoo/c/animal/duck/Duck.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="268" y="442"/>    
+    <display autosize="true" stereotype="false" package="false" initial-value="true" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="false" protected="false" private="false" static="false"/>      
+      <operations public="true" package="false" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="5" language="java" name="minizoo.c.animal.sheep.Sheep" project="OurMiniZoo" 
+    file="/OurMiniZoo/src/minizoo/c/animal/sheep/Sheep.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="625" y="489"/>    
+    <display autosize="true" stereotype="false" package="false" initial-value="true" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="false" protected="false" private="false" static="false"/>      
+      <operations public="true" package="false" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="6" language="java" name="minizoo.c.animal.lion.Lion" project="OurMiniZoo" 
+    file="/OurMiniZoo/src/minizoo/c/animal/lion/Lion.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="438" y="439"/>    
+    <display autosize="true" stereotype="false" package="false" initial-value="true" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="false" protected="false" private="false" static="false"/>      
+      <operations public="true" package="false" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="7" language="java" name="minizoo.c.animal.bear.Bear" project="OurMiniZoo" 
+    file="/OurMiniZoo/src/minizoo/c/animal/bear/Bear.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="618" y="304"/>    
+    <display autosize="true" stereotype="false" package="false" initial-value="true" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="false" protected="false" private="false" static="false"/>      
+      <operations public="true" package="false" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="8" language="java" name="minizoo.c.animal.penguin.Penguin" project="OurMiniZoo" 
+    file="/OurMiniZoo/src/minizoo/c/animal/penguin/Penguin.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="832" y="482"/>    
+    <display autosize="true" stereotype="false" package="false" initial-value="true" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="false" protected="false" private="false" static="false"/>      
+      <operations public="true" package="false" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <enumeration id="9" language="java" name="minizoo.e.State" project="OurMiniZoo" 
+    file="/OurMiniZoo/src/minizoo/e/State.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="365" y="556"/>    
+    <display autosize="true" stereotype="false" package="false" initial-value="true" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="false" protected="false" private="false" static="false"/>      
+      <operations public="true" package="false" protected="true" private="true" static="true"/>    
+    </display>  
+  </enumeration>  
+  <interface id="10" language="java" name="minizoo.i.TouchListener" project="OurMiniZoo" 
+    file="/OurMiniZoo/src/minizoo/i/TouchListener.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="650" y="164"/>    
+    <display autosize="true" stereotype="false" package="false" initial-value="true" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="true" package="false" protected="false" private="false" static="false"/>      
+      <operations public="true" package="false" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <realization id="11">    
+    <end type="SOURCE" refId="2"/>    
+    <end type="TARGET" refId="3"/>  
+  </realization>  
+  <generalization id="12">    
+    <end type="SOURCE" refId="5"/>    
+    <end type="TARGET" refId="2"/>  
+  </generalization>  
+  <association id="13">    
+    <end type="SOURCE" refId="2" navigable="false">      
+      <attribute id="14" name="prevState"/>      
+      <multiplicity id="15" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="9" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <dependency id="16">    
+    <end type="SOURCE" refId="5"/>    
+    <end type="TARGET" refId="9"/>  
+  </dependency>  
+  <generalization id="17">    
+    <end type="SOURCE" refId="7"/>    
+    <end type="TARGET" refId="2"/>  
+  </generalization>  
+  <generalization id="18">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="2"/>  
+  </generalization>  
+  <generalization id="19">    
+    <end type="SOURCE" refId="1"/>    
+    <end type="TARGET" refId="2"/>  
+  </generalization>  
+  <generalization id="20">    
+    <end type="SOURCE" refId="6"/>    
+    <end type="TARGET" refId="2"/>  
+  </generalization>  
+  <generalization id="21">    
+    <end type="SOURCE" refId="8"/>    
+    <end type="TARGET" refId="2"/>  
+  </generalization>  
+  <dependency id="22">    
+    <end type="SOURCE" refId="8"/>    
+    <end type="TARGET" refId="9"/>  
+  </dependency>  
+  <realization id="23">    
+    <end type="SOURCE" refId="2"/>    
+    <end type="TARGET" refId="10"/>  
+  </realization>  
+  <association id="24">    
+    <end type="SOURCE" refId="2" navigable="false">      
+      <attribute id="25" name="currState"/>      
+      <multiplicity id="26" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="9" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <classifier-display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+    accessors="true" visibility="true">    
+    <attributes public="true" package="true" protected="true" private="true" static="true"/>    
+    <operations public="true" package="true" protected="true" private="true" static="true"/>  
+  </classifier-display>  
+  <association-display labels="true" multiplicity="true"/>
+</class-diagram>

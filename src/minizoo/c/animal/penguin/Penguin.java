@@ -67,6 +67,7 @@ public class Penguin extends Animal {
         this.stopAllAction();
         this.setScale(0.3f, 0.3f);
         movingStop();
+        getBody().reset();
         getBody().stopAllAction();
         getBody().getLeftLeg().stopAllAction();
         getBody().getRightLeg().stopAllAction();
@@ -87,13 +88,25 @@ public class Penguin extends Animal {
         if (prevState != State.Normal) {
             allActionStop();
 
-            float stepWidth = 30f;
+            float stepWidth = 20f;
+
+            getBody().getLeftArm().setRotation((float)Math.toRadians(-10f));
+            getBody().getLeftArm().runAction(Forever.c(Sequence.c(
+                    RotateTo.c(0.3f, (float)Math.toRadians(-10f)),
+                    RotateTo.c(0.3f, (float)Math.toRadians(10f))
+            )));
+            getBody().getRightArm().setRotation((float)Math.toRadians(10f));
+            getBody().getRightArm().runAction(Forever.c(Sequence.c(
+                    RotateTo.c(0.3f, (float)Math.toRadians(10f)),
+                    RotateTo.c(0.3f, (float)Math.toRadians(-10f))
+            )));
+
             getBody().getHead().runAction(Forever.c(Sequence.c(MoveBy.c(1, 10, 0), MoveBy.c(1, -10, 0))));
             getBody().getLeftLeg().runAction(Forever.c(Sequence.c(
-                    Delay.c(0f), EaseOutSine.c(MoveBy.c(0.3f, stepWidth, 0)), EaseOutSine.c(MoveBy.c(0.3f, -stepWidth, 0))
+                    Delay.c(0.3f), EaseOutSine.c(MoveBy.c(0.3f, stepWidth, 0)), EaseOutSine.c(MoveBy.c(0.3f, -stepWidth, 0))
             )));
             getBody().getRightLeg().runAction(Forever.c(Sequence.c(
-                    EaseOutSine.c(MoveBy.c(0.3f, -stepWidth, 0)), EaseOutSine.c(MoveBy.c(0.3f, stepWidth, 0)), Delay.c(0f)
+                    EaseOutSine.c(MoveBy.c(0.3f, -stepWidth, 0)), EaseOutSine.c(MoveBy.c(0.3f, stepWidth, 0)), Delay.c(0.3f)
                     )));
 
             movingStart();
@@ -112,16 +125,14 @@ public class Penguin extends Animal {
             float stepWidth = 30f;
 
             getBody().runAction(Forever.c(Sequence.c(EaseInOutSine.c(MoveBy.c(0.2f, 0f, 40f)), RandomDelay.c(0.01f, 0.2f), EaseInOutSine.c(MoveBy.c(0.2f, 0f, -40f)))));
-            getBody().getHead().runAction(Forever.c(Sequence.c(RotateTo.c(0.3f, (float)Math.toRadians(-360)))));
-            getBody().getHead().runAction(Forever.c(Sequence.c(MoveBy.c(0.3f, -100f, -100f), MoveBy.c(0.3f, 100f, 100f), MoveBy.c(0.3f, -100f, 0f), MoveBy.c(0.3f, 100f, 0f))));
+            getBody().getHead().runAction(Forever.c(Sequence.c(MoveBy.c(0.3f, -30f, -30f), MoveBy.c(0.3f, 30f, 30f), MoveBy.c(0.3f, -30f, 0f), MoveBy.c(0.3f, 30f, 0f))));
+
+            getBody().getLeftArm().runAction(Forever.c(RotateTo.c(0.3f, (float)-Math.PI)));
+            getBody().getRightArm().runAction(Forever.c(RotateTo.c(0.3f, (float)Math.PI)));
+            getBody().getLeftLeg().runAction(Forever.c(RotateTo.c(0.3f, (float)Math.PI)));
+            getBody().getRightLeg().runAction(Forever.c(RotateTo.c(0.3f, (float)-Math.PI)));
             getBody().getLeftLeg().runAction(Forever.c(Sequence.c(
                     EaseOutSine.c(MoveBy.c(0.3f, -stepWidth, 0)), EaseOutSine.c(MoveBy.c(0.3f, stepWidth, 0)), RandomDelay.c(0.3f, 1f)
-            )));
-            getBody().getLeftLeg().runAction(Forever.c(Sequence.c(
-                    EaseOutSine.c(MoveBy.c(0.3f, -stepWidth, 0)), EaseOutSine.c(MoveBy.c(0.3f, stepWidth, 0)), RandomDelay.c(0.3f, 1f)
-            )));
-            getBody().getRightLeg().runAction(Forever.c(Sequence.c(
-                    RandomDelay.c(0.3f, 1f), EaseOutSine.c(MoveBy.c(0.3f, -stepWidth, 0)), EaseOutSine.c(MoveBy.c(0.3f, stepWidth, 0))
             )));
             getBody().getRightLeg().runAction(Forever.c(Sequence.c(
                     RandomDelay.c(0.3f, 1f), EaseOutSine.c(MoveBy.c(0.3f, -stepWidth, 0)), EaseOutSine.c(MoveBy.c(0.3f, stepWidth, 0))
@@ -139,8 +150,21 @@ public class Penguin extends Animal {
 
         if (prevState != State.Picking) {
             allActionStop();
+
+            getBody().getLeftArm().setRotation((float)Math.toRadians(-60f));
+            getBody().getLeftArm().runAction(Forever.c(Sequence.c(
+                    RotateTo.c(0.15f, (float)Math.toRadians(-120f)),
+                    RotateTo.c(0.15f, (float)Math.toRadians(120f))
+            )));
+            getBody().getRightArm().setRotation((float)Math.toRadians(60f));
+            getBody().getRightArm().runAction(Forever.c(Sequence.c(
+                    RotateTo.c(0.15f, (float)Math.toRadians(120f)),
+                    RotateTo.c(0.15f, (float)Math.toRadians(-120f))
+            )));
         } else if (!isStart) {
             allActionStop();
+            getBody().getLeftArm().setRotation(0);
+            getBody().getRightArm().setRotation(0);
         }
     }
     public PenguinBody getBody() {
