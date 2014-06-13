@@ -106,8 +106,8 @@ public class App implements ActionListener {
         lionSpanwer.setPosition(new Vector2d(600, 100));
         Entity.add(lionSpanwer, 0);
 
-		FPSTimer fpsTimer = new FPSTimer();
-		Entity.add(fpsTimer, Integer.MAX_VALUE);
+		//FPSTimer fpsTimer = new FPSTimer();
+		//Entity.add(fpsTimer, Integer.MAX_VALUE);
 	}
 
 	public void run() {
